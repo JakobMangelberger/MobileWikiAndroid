@@ -1,15 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/search_record"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
-        android:title="Search"
-        android:icon="@drawable/search_button"/>
+        android:title="@string/search"/>
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/clear_recent_suggestions"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
-        android:title="Article manager"/>
+        android:title="@string/clear"/>
 
 </menu>
