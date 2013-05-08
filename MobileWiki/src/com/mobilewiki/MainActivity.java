@@ -31,10 +31,11 @@ public class MainActivity extends Activity {
 		article_text_view.setMovementMethod(new ScrollingMovementMethod());
 		article_text_view.requestFocus();
 		// article_text_view.setText("line1 \nline2 \nline3 \nline4 \nline5 \nline6 \nline7 \nline8 \nline9 \nline10 line1 \nline2 \nline3 \nline4 \nline5 \nline6 \nline7 \nline8 \nline9 \nline10 line1 \nline2 \nline3 \nline4 \nline5 \nline6 \nline7 \nline8 \nline9 \nline10 line1 \nline2 \nline3 \nline4 \nline5 \nline6 \nline7 \nline8 \nline9 \nline10 line1 \nline2 \nline3 \nline4 \nline5 \nline6 \nline7 \nline8 \nline9 \nline10 line1 \nline2 \nline3 \nline4 \nline5 \nline6 \nline7 \nline8 \nline9 \nline10 line1 \nline2 \nline3 \nline4 \nline5 \nline6 \nline7 \nline8 \nline9 \nline10 \n");
-		String title = "<h2>Title</h2><br>";
-		String str = "<p> Descripti<br/>on here<br/> Descriptio<br/>n here Desc<br/>ription her<br/>e Descripti<br/>on here Desc<br/>ription hereD<br/>escription here<br/> Descripti<br/>on here D<br/>escri<br/>p<br/>tion here<br/>D<br/>e<br/><br/><br/><br/>scription here Description hereDescription here Description hereDescription hereDescription hereDescription here</p>";
+		String title = "<h2>Title</h2>";
+	//	String str = "<p> Descripti<br/>on here<br/> Descriptio<br/>n here Desc<br/>ription her<br/>e Descripti<br/>on here Desc<br/>ription hereD<br/>escription here<br/> Descripti<br/>on here D<br/>escri<br/>p<br/>tion here<br/>D<br/>e<br/><br/><br/><br/>scription here Description hereDescription here Description hereDescription hereDescription hereDescription here</p>";
+		String str = "<p>This is some paragraph with text. Test post, please ignore. Test post, please ignore. Test post, please ignore. Test post, please ignore.<p/>";
 		article_text_view.setMaxLines(article_text_view.getHeight()/article_text_view.getLineHeight());
-		article_text_view.setText(Html.fromHtml(title + str + str + title + str + str + str));
+		article_text_view.setText(Html.fromHtml(title + str + str + title + str + str + str+ str + str + str+ str + str + str+ str + str + str));
 		return true;
 		
 		//      android:maxLines="20"
