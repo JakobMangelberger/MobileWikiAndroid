@@ -17,7 +17,7 @@ public class TestActivity extends Activity {
 	
 	@Override
 	public void onStart(){
-		super.onStart();
+
 		TextView article_text_view = (TextView) findViewById(R.id.article_content);
 		article_text_view.setMovementMethod(new ScrollingMovementMethod());
 		article_text_view.requestFocus();
