@@ -4,24 +4,27 @@
     android1:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-	android1:background="@color/white" 
+	android1:paddingLeft="5dp"
+	android1:paddingTop="5dp"
     android:orientation="vertical">
 
     <LinearLayout
         android1:layout_width="match_parent"
         android1:layout_height="wrap_content"
+        android1:background="@color/grey"
         android1:paddingLeft="5dp"
-		android1:paddingTop="5dp"
-        android1:background="@color/grey" >
+        android1:paddingTop="5dp" >
 
         <EditText
             android1:id="@+id/search_text"
             android1:layout_width="0dp"
+            android1:inputType="text"
             android1:layout_height="44dp"
             android1:layout_marginRight="10dp"
             android1:layout_weight="0.72"
-            android1:inputType="text"
             android1:ems="10" >
+
+            <requestFocus />
         </EditText>
 
         <ImageButton
@@ -30,16 +33,15 @@
             android1:layout_height="wrap_content"
             android1:layout_marginTop="5dp"
             android1:layout_marginRight="5dp"
-            android1:background="@android:color/transparent"
             android1:contentDescription="@+strings/search"
+            android1:background="@android:color/transparent"
             android1:src="@drawable/search_button" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/article_content"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_margin="10dp"
-        android:textIsSelectable="true" />
+    <ListView
+        android1:id="@+id/listView1"
+        android1:layout_width="match_parent"
+        android1:layout_height="wrap_content" >
+    </ListView>
 
 </LinearLayout>
