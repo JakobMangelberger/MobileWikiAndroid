@@ -31,7 +31,7 @@
             android1:layout_marginTop="5dp"
             android1:layout_marginRight="5dp"
             android1:background="@android:color/transparent"
-            android1:contentDescription="@+strings/search"
+            android1:contentDescription="@string/search"
             android1:src="@drawable/search_button" />
     </LinearLayout>
 

@@ -1,55 +1,54 @@
 package com.mobilewiki.tables;
 
+import com.mobilewiki.SQLHandler;
+
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class WikiArticle implements IWikiArticle {
-	
-	private int arcticle_id;
-	private String title;
-	private Timestamp date_edit;
-	
-	
-	public WikiArticle()
-	{
-		this.arcticle_id = -1;
-		this.title = "";
-		this.date_edit = null;
-	}
-	
-	public WikiArticle(int article_id, String title)
-	{
-		this.arcticle_id = article_id;
-		this.title = title;
-	}
+    SortedMap<Timestamp, Integer> contents;
+    private int article_id;
+    private String title;
 
-	@Override
-	public int getArcticle_id() {
-		return arcticle_id;
-	}
 
-	@Override
-	public void setArcticle_id(int arcticle_id) {
-		this.arcticle_id = arcticle_id;
-	}
+    public WikiArticle(int articleId) {
+        SQLHandler sqlHandler = new SQLHandler();
 
-	@Override
-	public String getTitle() {
-		return title;
-	}
+        this.article_id = articleId;
+        this.title = sqlHandler.get_title(articleId);
+        this.contents = new TreeMap<Timestamp, Integer>();
+        List<Integer> contents_from_db = sqlHandler.get_contents_for_article(article_id);
+        for (int content_id : contents_from_db) {
+            contents.put(sqlHandler.get_timestampt_for_content(content_id), content_id);
+        }
+    }
 
-	@Override
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public WikiArticle(int article_id, String title) {
+        this.article_id = article_id;
+        this.title = title;
+    }
 
-	@Override
-	public Timestamp getDate_edit() {
-		return date_edit;
-	}
+    @Override
+    public int getArticle_id() {
+        return article_id;
+    }
 
-	@Override
-	public void setDate_edit(Timestamp date_edit) {
-		this.date_edit = date_edit;
-	}
+    @Override
+    public void setArticle_id(int article_id) {
+        this.article_id = article_id;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
 
 }

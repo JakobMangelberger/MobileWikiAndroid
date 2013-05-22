@@ -1,5 +1,8 @@
 package com.mobilewiki;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 public class SQLHandler {
     String[] titles = new String[]{"Android", "iPhone", "WindowsMobile",
             "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
@@ -21,5 +24,13 @@ public class SQLHandler {
             return null;
 
         return titles[id];
+    }
+
+    public List<Integer> get_contents_for_article(int article_id) {
+        return null;
+    }
+
+    public Timestamp get_timestampt_for_content(int content_id) {
+        return null;
     }
 }
