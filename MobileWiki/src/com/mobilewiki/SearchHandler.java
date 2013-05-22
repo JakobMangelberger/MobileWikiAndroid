@@ -10,6 +10,15 @@ public class SearchHandler {
     }
 
     public IWikiArticle[] search_articles(String phrase) {
-        return new IWikiArticle[] { new WikiArticle(0, "Test")};
+        SQLHandler sqlHandler = new SQLHandler();
+        int[] ids =sqlHandler.get_ids();
+
+        IWikiArticle[] articles = new IWikiArticle[ids.length];
+        for(int i = 0; i < articles.length; i++)
+        {
+            articles[i] = new WikiArticle(i, sqlHandler.get_title(ids[i]));
+        }
+
+        return articles;
     }
 }

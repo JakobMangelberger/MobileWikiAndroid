@@ -46,11 +46,7 @@ public class SearchActivity extends Activity {
         }
 
         final ListView listview = (ListView) findViewById(R.id.listView1);
-        String[] values = new String[]{"Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile"};
+
 
         IWikiArticle[] articles = searchHandler.search_articles(searchPhrase);
 
