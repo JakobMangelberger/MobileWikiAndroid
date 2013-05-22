@@ -9,6 +9,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -23,7 +24,8 @@ public class MainActivity extends Activity {
 	@Override
 	public void onStart(){
 		super.onStart();
-		
+		final EditText searchPhrase = (EditText) findViewById(R.id.search_text);
+
 		Bundle b = getIntent().getExtras();
 		String title, value = null;
 		if (b != null)
@@ -44,6 +46,9 @@ public class MainActivity extends Activity {
 			public void onClick(View v)
 			{
 				Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                Bundle parameters = new Bundle(1);
+                parameters.putString("SEARCH_PHRASE", searchPhrase.getText().toString());
+                intent.putExtras(parameters);
 		        startActivity(intent);
 		}
 		});
