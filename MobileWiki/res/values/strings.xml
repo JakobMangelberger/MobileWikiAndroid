@@ -12,6 +12,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="noentries">Keine Einträge vorhanden</string>
     
 	<color name="grey">#DDDDDD</color>
 	<color name="white">#FFFFFF</color>

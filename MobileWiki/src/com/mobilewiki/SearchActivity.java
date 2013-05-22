@@ -1,5 +1,7 @@
 package com.mobilewiki;
 
+import com.mobilewiki.controls.StableArrayAdapter;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -82,37 +84,4 @@ public class SearchActivity extends Activity {
         return true;
     }
 
-}
-
-class StableArrayAdapter extends ArrayAdapter<String> {
-
-    HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
-
-    public StableArrayAdapter(Context context, int textViewResourceId,
-                              List<String> objects) {
-        super(context, textViewResourceId, objects);
-        for (int i = 0; i < objects.size(); ++i) {
-            mIdMap.put(objects.get(i), i);
-        }
-    }
-
-    @Override
-    public long getItemId(int position) {
-        String item = getItem(position);
-        return mIdMap.get(item);
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view = super.getView(position, convertView, parent);
-        TextView tv = (TextView) view;
-        tv.setTextColor(Color.BLACK);
-        view.setBackgroundColor(Color.WHITE);
-        return view;
-    }
 }
