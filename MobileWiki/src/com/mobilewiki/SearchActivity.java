@@ -48,11 +48,10 @@ public class SearchActivity extends Activity {
         final ListView listview = (ListView) findViewById(R.id.listView1);
 
 
-        IWikiArticle[] articles = searchHandler.search_articles(searchPhrase);
-
+       List<IWikiArticle> articles = searchHandler.search_articles(searchPhrase);
         final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < articles.length; ++i) {
-            list.add(articles[i].getTitle());
+        for (IWikiArticle article : articles) {
+            list.add(article.getTitle());
         }
 
         final StableArrayAdapter adapter = new StableArrayAdapter(getApplicationContext(),

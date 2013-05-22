@@ -64,6 +64,7 @@ public class SQLHandler {
 
     public List<String> get_tags_for_content(int content_id) {
         List<String> result = new ArrayList<String>();
+
         result.add("tag1");
         result.add("tag2");
 

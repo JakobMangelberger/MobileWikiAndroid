@@ -15,7 +15,7 @@ public class WikiContent implements IWikiContent {
 	private Timestamp date_change;
     private List<String> tags;
 	
-	WikiContent(int content_id) {
+	public WikiContent(int content_id) {
         SQLHandler sqlHandler = SQLHandler.getInstance();
 		this.content_id = content_id;
 		this.article_id = sqlHandler.get_article_id_for_content(content_id);
@@ -23,8 +23,8 @@ public class WikiContent implements IWikiContent {
 		this.date_change = sqlHandler.get_timestamp_for_content(content_id);
         this.tags = sqlHandler.get_tags_for_content(content_id);
 	}
-	
-	WikiContent(int content_id, int article_id, String text, List<String> tags) {
+
+    public WikiContent(int content_id, int article_id, String text, List<String> tags) {
 		this.content_id = content_id;
 		this.article_id = article_id;
 		this.text = text;
@@ -51,4 +51,9 @@ public class WikiContent implements IWikiContent {
 	public Timestamp getDate_change() {
 		return date_change;
 	}
+
+    @Override
+    public List<String> getTags() {
+        return tags;
+    }
 }
