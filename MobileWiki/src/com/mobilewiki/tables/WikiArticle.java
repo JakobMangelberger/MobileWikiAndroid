@@ -14,14 +14,14 @@ public class WikiArticle implements IWikiArticle {
 
 
     public WikiArticle(int articleId) {
-        SQLHandler sqlHandler = new SQLHandler();
+        SQLHandler sqlHandler = SQLHandler.getInstance();
 
         this.article_id = articleId;
         this.title = sqlHandler.get_title(articleId);
         this.contents = new TreeMap<Timestamp, Integer>();
         List<Integer> contents_from_db = sqlHandler.get_contents_for_article(article_id);
         for (int content_id : contents_from_db) {
-            contents.put(sqlHandler.get_timestampt_for_content(content_id), content_id);
+            contents.put(sqlHandler.get_timestamp_for_content(content_id), content_id);
         }
     }
 
@@ -36,11 +36,6 @@ public class WikiArticle implements IWikiArticle {
     }
 
     @Override
-    public void setArticle_id(int article_id) {
-        this.article_id = article_id;
-    }
-
-    @Override
     public String getTitle() {
         return title;
     }
@@ -50,5 +45,7 @@ public class WikiArticle implements IWikiArticle {
         this.title = title;
     }
 
-
+    public int getLastContentId() {
+        return contents.get(contents.lastKey());
+    }
 }
