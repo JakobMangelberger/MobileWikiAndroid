@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
 		else
 			title = "<h2>Startseite</h2>";
 		String str = "<p>Das ist ein Test<p/>";
-		article_text_view.setTextColor(Color.BLACK);
 		article_text_view.setText(Html.fromHtml(title + str + str + title + str + str + str+ str + str + str+ str + str + str+ str + str + str));
 		
 		ImageButton searchButton = (ImageButton) findViewById(R.id.search_button);

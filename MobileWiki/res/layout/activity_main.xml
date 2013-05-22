@@ -40,6 +40,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_margin="10dp"
-        android:textIsSelectable="true" />
+        android:textIsSelectable="true"
+        android:textColor="@android:color/black"/>
 
 </LinearLayout>
