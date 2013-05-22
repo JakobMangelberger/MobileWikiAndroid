@@ -10,9 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchHandler {
+    private static SearchHandler _instance;
+    public static SearchHandler getInstance() {
+        if(null == _instance)
+            new SearchHandler();
+        return _instance;
+    }
 
-    public void init_search(String search_item) {
-
+    private SearchHandler() {
+        _instance = this;
     }
 
     public List<IWikiArticle> search_articles(String phrase) {

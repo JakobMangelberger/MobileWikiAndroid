@@ -34,7 +34,7 @@ public class SearchActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        searchHandler = new SearchHandler();
+        searchHandler = SearchHandler.getInstance();
         list = new ArrayList<String>();
 
         Bundle parameters = getIntent().getExtras();
