@@ -10,10 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.mobilewiki.tables.IWikiArticle;
 
 import java.util.ArrayList;
@@ -22,6 +19,7 @@ import java.util.List;
 
 public class SearchActivity extends Activity {
     SearchHandler searchHandler;
+    ArrayList<String> list;
 
     @SuppressLint("NewApi")
     @Override
@@ -34,6 +32,7 @@ public class SearchActivity extends Activity {
     public void onStart() {
         super.onStart();
         searchHandler = new SearchHandler();
+        list = new ArrayList<String>();
 
         Bundle parameters = getIntent().getExtras();
         String searchPhrase;
@@ -45,15 +44,9 @@ public class SearchActivity extends Activity {
             searchPhrase = "";
         }
 
+        performSearch(this, searchHandler, list, searchPhrase);
+
         final ListView listview = (ListView) findViewById(R.id.listView1);
-
-
-       List<IWikiArticle> articles = searchHandler.search_articles(searchPhrase);
-        final ArrayList<String> list = new ArrayList<String>();
-        for (IWikiArticle article : articles) {
-            list.add(article.getTitle());
-        }
-
         final StableArrayAdapter adapter = new StableArrayAdapter(getApplicationContext(),
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
@@ -73,7 +66,33 @@ public class SearchActivity extends Activity {
 
         });
         listview.requestFocus();
+
+        final EditText searchPhraseBox = (EditText) findViewById(R.id.search_text);
+        final Activity context = this;
+        ImageButton searchButton = (ImageButton) findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                performSearch(context, searchHandler, list, searchPhraseBox.getText().toString());
+                Log.d("SEARCH", Integer.toString(list.size()));
+                ((StableArrayAdapter)listview.getAdapter()).notifyDataSetChanged();
+            }
+        });
     }
+
+    private static void performSearch(Activity context, SearchHandler searchHandler, List<String> list, String searchPhrase) {
+        List<IWikiArticle> articles = searchHandler.search_articles(searchPhrase);
+        list.clear();
+
+        for (IWikiArticle article : articles) {
+            list.add(article.getTitle());
+        }
+        if(list.size() == 0) {
+            //list.add(context.getString(R.string.no));
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,7 +122,7 @@ class StableArrayAdapter extends ArrayAdapter<String> {
 
     @Override
     public boolean hasStableIds() {
-        return true;
+        return false;
     }
 
     @Override
