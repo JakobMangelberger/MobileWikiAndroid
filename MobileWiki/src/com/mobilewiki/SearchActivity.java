@@ -20,6 +20,9 @@ import java.util.List;
 public class SearchActivity extends Activity {
     SearchHandler searchHandler;
     ArrayList<String> list;
+    StableArrayAdapter adapter;
+    StableArrayAdapter noEntriesAdapter;
+    boolean areThereEntries = true;
 
     @SuppressLint("NewApi")
     @Override
@@ -43,19 +46,29 @@ public class SearchActivity extends Activity {
         } else {
             searchPhrase = "";
         }
-
-        performSearch(this, searchHandler, list, searchPhrase);
-
         final ListView listview = (ListView) findViewById(R.id.listView1);
-        final StableArrayAdapter adapter = new StableArrayAdapter(getApplicationContext(),
+
+
+        adapter = new StableArrayAdapter(getApplicationContext(),
                 android.R.layout.simple_list_item_1, list);
+
+        List<String> noEntriesList = new ArrayList<String>(1);
+        noEntriesList.add(getString(R.string.noentries));
+        noEntriesAdapter = new StableArrayAdapter(getApplicationContext(),
+                android.R.layout.simple_list_item_1, noEntriesList);
+
         listview.setAdapter(adapter);
+
+        performSearch(listview, searchHandler, list, searchPhrase);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
+                if(!areThereEntries)
+                    return;
+
                 final String item = (String) parent.getItemAtPosition(position);
                 Intent intent = new Intent(SearchActivity.this, MainActivity.class);
                 Bundle b = new Bundle();
@@ -68,20 +81,19 @@ public class SearchActivity extends Activity {
         listview.requestFocus();
 
         final EditText searchPhraseBox = (EditText) findViewById(R.id.search_text);
-        final Activity context = this;
         ImageButton searchButton = (ImageButton) findViewById(R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                performSearch(context, searchHandler, list, searchPhraseBox.getText().toString());
+                performSearch(listview, searchHandler, list, searchPhraseBox.getText().toString());
                 Log.d("SEARCH", Integer.toString(list.size()));
                 ((StableArrayAdapter)listview.getAdapter()).notifyDataSetChanged();
             }
         });
     }
 
-    private static void performSearch(Activity context, SearchHandler searchHandler, List<String> list, String searchPhrase) {
+    private void performSearch(ListView listView, SearchHandler searchHandler, List<String> list, String searchPhrase) {
         List<IWikiArticle> articles = searchHandler.search_articles(searchPhrase);
         list.clear();
 
@@ -89,7 +101,11 @@ public class SearchActivity extends Activity {
             list.add(article.getTitle());
         }
         if(list.size() == 0) {
-            //list.add(context.getString(R.string.no));
+            listView.setAdapter(noEntriesAdapter);
+            areThereEntries = false;
+        } else {
+            listView.setAdapter(adapter);
+            areThereEntries = true;
         }
     }
 
@@ -117,12 +133,16 @@ class StableArrayAdapter extends ArrayAdapter<String> {
     @Override
     public long getItemId(int position) {
         String item = getItem(position);
-        return mIdMap.get(item);
+        try {
+            return mIdMap.get(item);
+        } catch (NullPointerException ex) {
+            return 0;
+        }
     }
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     @Override
