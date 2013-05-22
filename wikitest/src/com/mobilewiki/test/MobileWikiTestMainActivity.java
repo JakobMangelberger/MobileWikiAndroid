@@ -7,6 +7,7 @@ import com.mobilewiki.controls.StableArrayAdapter;
 
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
+
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -82,10 +83,19 @@ public class MobileWikiTestMainActivity extends
 			e.printStackTrace();
 		}
 
-		getInstrumentation().waitForIdleSync();
-		assertNotNull(button2);
-
 		childActivity.finish();
+		
+		try {
+			getInstrumentation().waitForIdleSync();
+			assertNotNull(button2);			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			childActivity.finish();
+		}
+
 	}
 
 	/*Execute search with query that should fail*/
@@ -135,13 +145,20 @@ public class MobileWikiTestMainActivity extends
 			e.printStackTrace();
 		}
 
-		getInstrumentation().waitForIdleSync();
-		assertNotNull(listView);
-		assertEquals(listView.getCount(), 1);
-		StableArrayAdapter adapter = (StableArrayAdapter)listView.getAdapter();
-		assertEquals(adapter.getItem(0), activity.getResources().getString(R.string.noentries));
-
-		childActivity.finish();
+		
+		try {
+			getInstrumentation().waitForIdleSync();
+			assertNotNull(listView);
+			assertEquals(listView.getCount(), 1);
+			StableArrayAdapter adapter = (StableArrayAdapter)listView.getAdapter();
+			assertEquals(adapter.getItem(0), activity.getResources().getString(R.string.noentries));			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			childActivity.finish();
+		}		
 	}
 	
 }
