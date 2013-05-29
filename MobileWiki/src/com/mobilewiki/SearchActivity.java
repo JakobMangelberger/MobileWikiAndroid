@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import com.mobilewiki.tables.IWikiArticle;
+import com.mobilewiki.tables.WikiArticle;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -133,6 +134,24 @@ public class SearchActivity extends Activity {
                 @Override
                 public int compare(String s, String s2) {
                     return s2.toLowerCase().compareTo(s.toLowerCase());
+                }
+            });
+        } else if (sortMode == 2) {
+            adapter.sort(new Comparator<String>() {
+                @Override
+                public int compare(String s, String s2) {
+                    IWikiArticle article1 = new WikiArticle(SQLHandler.getInstance().get_id_for_article_title(s));
+                    IWikiArticle article2 = new WikiArticle(SQLHandler.getInstance().get_id_for_article_title(s2));
+                    return article1.getLastContentTimestamp().compareTo(article2.getLastContentTimestamp());
+                }
+            });
+        } else if (sortMode == 3) {
+            adapter.sort(new Comparator<String>() {
+                @Override
+                public int compare(String s, String s2) {
+                    IWikiArticle article1 = new WikiArticle(SQLHandler.getInstance().get_id_for_article_title(s2));
+                    IWikiArticle article2 = new WikiArticle(SQLHandler.getInstance().get_id_for_article_title(s));
+                    return article1.getLastContentTimestamp().compareTo(article2.getLastContentTimestamp());
                 }
             });
         }
