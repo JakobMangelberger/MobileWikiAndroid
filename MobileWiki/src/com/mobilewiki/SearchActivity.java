@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import com.mobilewiki.tables.IWikiArticle;
 
@@ -91,6 +93,25 @@ public class SearchActivity extends Activity {
                 ((StableArrayAdapter)listview.getAdapter()).notifyDataSetChanged();
             }
         });
+
+        setKeyboardSearchButtonListener();
+    }
+
+    private void setKeyboardSearchButtonListener() {
+        EditText searchText = (EditText)findViewById(R.id.search_text);
+        final ImageButton searchButton = (ImageButton) findViewById(R.id.search_button);
+        if(null != searchText) {
+            searchText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                        searchButton.performClick();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        }
     }
 
     private void performSearch(ListView listView, SearchHandler searchHandler, List<String> list, String searchPhrase) {

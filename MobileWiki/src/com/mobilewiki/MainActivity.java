@@ -6,9 +6,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -54,7 +56,26 @@ public class MainActivity extends Activity {
 		});
 		
 		searchButton.requestFocus();
+
+        setKeyboardSearchButtonListener();
 	}
+
+    private void setKeyboardSearchButtonListener() {
+        EditText searchText = (EditText)findViewById(R.id.search_text);
+        final ImageButton searchButton = (ImageButton) findViewById(R.id.search_button);
+        if(null != searchText) {
+            searchText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                        searchButton.performClick();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        }
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) { 

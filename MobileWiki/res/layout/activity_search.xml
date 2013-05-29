@@ -22,7 +22,8 @@
             android1:layout_height="44dp"
             android1:layout_marginRight="10dp"
             android1:layout_weight="0.72"
-            android1:ems="10" >
+            android1:ems="10"
+            android:imeOptions="actionSearch" >
 
             <requestFocus />
         </EditText>
@@ -33,7 +34,7 @@
             android1:layout_height="wrap_content"
             android1:layout_marginTop="5dp"
             android1:layout_marginRight="5dp"
-            android1:contentDescription="@+strings/search"
+            android1:contentDescription="@string/search"
             android1:background="@android:color/transparent"
             android1:src="@drawable/search_button" />
     </LinearLayout>

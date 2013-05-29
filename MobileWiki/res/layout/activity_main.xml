@@ -21,7 +21,8 @@
             android1:layout_marginRight="10dp"
             android1:layout_weight="0.72"
             android1:inputType="text"
-            android1:ems="10" >
+            android1:ems="10"
+            android:imeOptions="actionSearch" >
         </EditText>
 
         <ImageButton
