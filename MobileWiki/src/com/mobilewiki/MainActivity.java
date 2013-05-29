@@ -2,12 +2,12 @@ package com.mobilewiki;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -81,6 +81,22 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) { 
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;	   
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.edit_article:
+	        	Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+                Bundle parameters = new Bundle(1);
+                parameters.putString("ARTICLE_ID", "1");
+                intent.putExtras(parameters);
+		        startActivity(intent);
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 
 }
