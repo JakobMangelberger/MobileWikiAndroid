@@ -45,7 +45,13 @@ public class WikiArticle implements IWikiArticle {
         this.title = title;
     }
 
+    @Override
     public int getLastContentId() {
         return contents.get(contents.lastKey());
+    }
+
+    @Override
+    public Timestamp getLastContentTimestamp() {
+        return contents.lastKey();
     }
 }

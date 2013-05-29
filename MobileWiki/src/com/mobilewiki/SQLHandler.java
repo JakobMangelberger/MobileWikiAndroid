@@ -8,13 +8,15 @@ import java.util.Calendar;
 import java.util.List;
 
 public class SQLHandler {
-    static SQLHandler _instance;
+    private static SQLHandler _instance;
     public static SQLHandler getInstance() {
         if(null == _instance) {
             _instance = new SQLHandler();
         }
         return _instance;
     }
+
+    private static int time_offset = 0;
 
 
     String[] titles = new String[]{"Android", "iPhone", "WindowsMobile",
@@ -51,7 +53,7 @@ public class SQLHandler {
     }
 
     public Timestamp get_timestamp_for_content(int content_id) {
-        return new Timestamp(Calendar.getInstance().getTime().getTime());
+        return new Timestamp(Calendar.getInstance().getTime().getTime() + 100 * (time_offset++));
     }
 
     public int get_article_id_for_content(int content_id) {
@@ -69,5 +71,13 @@ public class SQLHandler {
         result.add("tag2");
 
         return result;
+    }
+
+    public int get_id_for_article_title(String title) {
+        for(int i = 0; i < titles.length; i++) {
+            if(titles[i] == title)
+                return i;
+        }
+        return  -1;
     }
 }

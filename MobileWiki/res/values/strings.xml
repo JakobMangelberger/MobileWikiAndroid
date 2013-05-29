@@ -12,6 +12,8 @@
     <string-array name="search_sort">
         <item>Sort by Title (asc)</item>
         <item>Sort by Title (desc)</item>
+        <item>Sort by Date (asc)</item>
+        <item>Sort by Date (desc)</item>
     </string-array>
     <string name="clear">Clear</string>
     <string name="title_activity_test">TestActivity</string>
