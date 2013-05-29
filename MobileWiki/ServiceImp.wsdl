@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace=http://service.com 
+	xmlns:apachesoap=http://xml.apache.org/xml-soap 
+	xmlns:impl="http://service.com" xmlns:intf=http://service.com 
+	xmlns:wsdl=http://schemas.xmlsoap.org/wsdl/ 
+	xmlns:wsdlsoap=http://schemas.xmlsoap.org/wsdl/soap/ 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" 
+      targetNamespace="http://service.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="message">
+    <complexType/>
+   </element>
+   <element name="messageResponse">
+    <complexType>
+     <sequence>
+      <element name="messageReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="messageResponse">
+      <wsdl:part element="impl:messageResponse" name="parameters">
+      </wsdl:part>
+   </wsdl:message>
+   <wsdl:message name="messageRequest">
+      <wsdl:part element="impl:message" name="parameters">
+      </wsdl:part>
+   </wsdl:message>
+   <wsdl:portType name="ServiceImpl">
+      <wsdl:operation name="message">
+         <wsdl:input message="impl:messageRequest" name="messageRequest">
+       </wsdl:input>
+         <wsdl:output message="impl:messageResponse" name="messageResponse">
+       </wsdl:output>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="ServiceImplSoapBinding" type="impl:ServiceImpl">
+      <wsdlsoap:binding style="document" 
+	transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="message">
+         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input name="messageRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="messageResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="ServiceImplService">
+      <wsdl:port binding="impl:ServiceImplSoapBinding" name="ServiceImpl">
+         <wsdlsoap:address location=
+		"http://localhost:9000/AndroidWS/services/ServiceImpl"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
