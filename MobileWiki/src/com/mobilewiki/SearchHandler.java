@@ -32,7 +32,14 @@ public class SearchHandler {
             IWikiContent tempContent = new WikiContent(tempArticle.getLastContentId());
             if (!allKeywords) {
                 for (String keyword : keywords) {
-                    if (tempContent.getTags().contains(keyword)) {
+                    boolean contains = false;
+                    for(String tag : tempContent.getTags()) {
+                        if(tag.equalsIgnoreCase(keyword)) {
+                            contains = true;
+                            break;
+                        }
+                    }
+                    if (contains) {
                         articles.add(tempArticle);
                         break;
                     }
@@ -40,7 +47,14 @@ public class SearchHandler {
             } else {
                 boolean allKeywordsFound = true;
                 for(String keyword : keywords) {
-                    if(!tempContent.getTags().contains(keyword)) {
+                    boolean contains = false;
+                    for(String tag : tempContent.getTags()) {
+                        if(tag.equalsIgnoreCase(keyword)) {
+                            contains = true;
+                            break;
+                        }
+                    }
+                    if(!contains) {
                         allKeywordsFound = false;
                         break;
                     }
