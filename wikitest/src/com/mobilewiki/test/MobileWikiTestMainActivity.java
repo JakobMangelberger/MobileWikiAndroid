@@ -151,7 +151,7 @@ public class MobileWikiTestMainActivity extends
 			assertNotNull(listView);
 			assertEquals(listView.getCount(), 1);
 			StableArrayAdapter adapter = (StableArrayAdapter)listView.getAdapter();
-			assertEquals(adapter.getItem(0), activity.getResources().getString(R.string.noentries));			
+			assertEquals(adapter.getItem(0), activity.getResources().getString(R.string.no_entries));
 		}
 		catch (Exception e) {
 			e.printStackTrace();

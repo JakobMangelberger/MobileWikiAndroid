@@ -16,6 +16,7 @@ import android.widget.*;
 import com.mobilewiki.tables.IWikiArticle;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,12 +26,19 @@ public class SearchActivity extends Activity {
     StableArrayAdapter adapter;
     StableArrayAdapter noEntriesAdapter;
     boolean areThereEntries = true;
+    int sortMode = 0;
 
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        performSearch();
     }
 
     @Override
@@ -48,6 +56,7 @@ public class SearchActivity extends Activity {
         } else {
             searchPhrase = "";
         }
+
         final ListView listview = (ListView) findViewById(R.id.listView1);
 
 
@@ -55,20 +64,23 @@ public class SearchActivity extends Activity {
                 android.R.layout.simple_list_item_1, list);
 
         List<String> noEntriesList = new ArrayList<String>(1);
-        noEntriesList.add(getString(R.string.noentries));
+        noEntriesList.add(getString(R.string.no_entries));
         noEntriesAdapter = new StableArrayAdapter(getApplicationContext(),
                 android.R.layout.simple_list_item_1, noEntriesList);
 
         listview.setAdapter(adapter);
 
-        performSearch(listview, searchHandler, list, searchPhrase);
+        EditText searchPhraseBox = (EditText) findViewById(R.id.search_text);
+        searchPhraseBox.setText(searchPhrase);
+
+        performSearch();
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
-                if(!areThereEntries)
+                if (!areThereEntries)
                     return;
 
                 final String item = (String) parent.getItemAtPosition(position);
@@ -82,25 +94,54 @@ public class SearchActivity extends Activity {
         });
         listview.requestFocus();
 
-        final EditText searchPhraseBox = (EditText) findViewById(R.id.search_text);
         ImageButton searchButton = (ImageButton) findViewById(R.id.search_button);
-        searchButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                performSearch(listview, searchHandler, list, searchPhraseBox.getText().toString());
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                performSearch();
                 Log.d("SEARCH", Integer.toString(list.size()));
-                ((StableArrayAdapter)listview.getAdapter()).notifyDataSetChanged();
+                ((StableArrayAdapter) listview.getAdapter()).notifyDataSetChanged();
+            }
+        });
+
+        Spinner spinner = (Spinner) findViewById(R.id.search_sort_selector);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                sortMode = i;
+                sort();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
         setKeyboardSearchButtonListener();
     }
 
+    void sort() {
+        if (sortMode == 0) {
+            adapter.sort(new Comparator<String>() {
+                @Override
+                public int compare(String s, String s2) {
+                    return s.toLowerCase().compareTo(s2.toLowerCase());
+                }
+            });
+        } else if (sortMode == 1) {
+            adapter.sort(new Comparator<String>() {
+                @Override
+                public int compare(String s, String s2) {
+                    return s2.toLowerCase().compareTo(s.toLowerCase());
+                }
+            });
+        }
+    }
+
     private void setKeyboardSearchButtonListener() {
-        EditText searchText = (EditText)findViewById(R.id.search_text);
+        EditText searchText = (EditText) findViewById(R.id.search_text);
         final ImageButton searchButton = (ImageButton) findViewById(R.id.search_button);
-        if(null != searchText) {
+        if (null != searchText) {
             searchText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -114,22 +155,32 @@ public class SearchActivity extends Activity {
         }
     }
 
-    private void performSearch(ListView listView, SearchHandler searchHandler, List<String> list, String searchPhrase) {
-        List<IWikiArticle> articles = searchHandler.search_articles(searchPhrase);
+    private void performSearch() {
+        ListView listView = (ListView) findViewById(R.id.listView1);
+        SearchHandler searchHandler = SearchHandler.getInstance();
+        ToggleButton typeButton = (ToggleButton) findViewById(R.id.search_type_button);
+        boolean matchAllKeywords = false;
+        if (null != typeButton) {
+            matchAllKeywords = typeButton.isChecked();
+        }
+
+        EditText searchPhraseBox = (EditText) findViewById(R.id.search_text);
+        List<IWikiArticle> articles = searchHandler.search_articles(searchPhraseBox.getText().toString(), matchAllKeywords);
         list.clear();
 
         for (IWikiArticle article : articles) {
             list.add(article.getTitle());
         }
-        if(list.size() == 0) {
+        if (list.size() == 0) {
             listView.setAdapter(noEntriesAdapter);
             areThereEntries = false;
         } else {
             listView.setAdapter(adapter);
             areThereEntries = true;
         }
-    }
 
+        sort();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
