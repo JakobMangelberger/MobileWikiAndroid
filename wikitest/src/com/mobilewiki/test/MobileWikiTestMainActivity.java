@@ -147,7 +147,7 @@ public class MobileWikiTestMainActivity extends
 			StableArrayAdapter adapter = (StableArrayAdapter) listView
 					.getAdapter();
 			assertEquals(adapter.getItem(0),
-					activity.getResources().getString(R.string.noentries));
+					activity.getResources().getString(R.string.no_entries));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -219,7 +219,7 @@ public class MobileWikiTestMainActivity extends
 			StableArrayAdapter adapter = (StableArrayAdapter) listView
 					.getAdapter();
 			assertEquals(adapter.getItem(0),
-					activity.getResources().getString(R.string.noentries));
+					activity.getResources().getString(R.string.no_entries));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
