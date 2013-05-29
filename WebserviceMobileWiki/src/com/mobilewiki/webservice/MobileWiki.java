@@ -11,34 +11,34 @@ public class MobileWiki {
 	private DatabaseController db_controller = new DatabaseController();
 	private String query = "";
 	private ResultSet rs = null;
-	
+
 	public String respondMessage(String message) {
 		return "Received message: " + message;
 	}
-	
-    public List<Integer> getArticleIds() {
-    	List<Integer> article_ids = new ArrayList<Integer>();
-    	
-    	query = "Select article_id from wiki_article";
-        try {
+
+	public List<Integer> getArticleIds() {
+		List<Integer> article_ids = new ArrayList<Integer>();
+
+		query = "Select article_id from mobilewikia.wiki_article";
+		try {
 			rs = db_controller.getResultSet(query);
-			
-	        if (rs != null) {
-	        	while (rs.next()) {
-	        		article_ids.add(rs.getInt("article_id"));
-	        	}
-	        }
-		
-        } catch (SQLException e) {
+
+			if (rs != null) {
+				while (rs.next()) {
+					article_ids.add(rs.getInt("article_id"));
+				}
+			}
+
+		} catch (SQLException e) {
 			System.err.println(e.toString());
 			System.out.println("Error executing the Query: " + query);
-		
-        } finally {
+
+		} finally {
 			try {
 				if (rs != null) {
 					rs.close();
 				}
-			
+
 			} catch (SQLException e) {
 				System.err.println(e.toString());
 				System.out.println("Error closing ResultSet: getArticleIds()");
@@ -46,197 +46,215 @@ public class MobileWiki {
 			db_controller.closeConnectionStatement();
 		}
 
-        return article_ids;
-    }
+		return article_ids;
+	}
 
-    public String getTitleForArticleId(int article_id) {
-    	String title = "";
-    	
-    	query = "Select title from wiki_article where article_id = '" + article_id + "'";
-        try {
+	public String getTitleForArticleId(int article_id) {
+		String title = "";
+
+		query = "Select title from mobilewikia.wiki_article where article_id = '"
+				+ article_id + "'";
+		try {
 			rs = db_controller.getResultSet(query);
+
+			if (rs != null && rs.next()) {
+				title = rs.getString("title");
+			}
 			
-	        if (rs != null && rs.next()) {
-	        	title = rs.getString("title");
-	        }
-		
-        } catch (SQLException e) {
+		} catch (SQLException e) {
 			System.err.println(e.toString());
 			System.out.println("Error executing the Query: " + query);
-		
-        } finally {
+
+		} finally {
 			try {
 				if (rs != null) {
 					rs.close();
 				}
-			
+
 			} catch (SQLException e) {
 				System.err.println(e.toString());
-				System.out.println("Error closing ResultSet: getTitleForArticleId(" + article_id + ")");
+				System.out
+						.println("Error closing ResultSet: getTitleForArticleId("
+								+ article_id + ")");
 			}
 			db_controller.closeConnectionStatement();
 		}
 
-        return title;
-    }
+		return title;
+	}
 
-    public List<Integer> getContentIdsforArticleId(int article_id) {
-    	List<Integer> content_ids = new ArrayList<Integer>();
-    	
-    	query = "Select content_id from wiki_content where article_id = '" + article_id + "'";
-        try {
+	public List<Integer> getContentIdsforArticleId(int article_id) {
+		List<Integer> content_ids = new ArrayList<Integer>();
+
+		query = "Select content_id from mobilewikia.wiki_content where article_id = '"
+				+ article_id + "'";
+		try {
 			rs = db_controller.getResultSet(query);
-			
-	        if (rs != null) {
-	        	while (rs.next()) {
-	        		content_ids.add(rs.getInt("content_id"));
-	        	}
-	        }
-		
-        } catch (SQLException e) {
+
+			if (rs != null) {
+				while (rs.next()) {
+					content_ids.add(rs.getInt("content_id"));
+				}
+			}
+
+		} catch (SQLException e) {
 			System.err.println(e.toString());
 			System.out.println("Error executing the Query: " + query);
-		
-        } finally {
+
+		} finally {
 			try {
 				if (rs != null) {
 					rs.close();
 				}
-			
+
 			} catch (SQLException e) {
 				System.err.println(e.toString());
-				System.out.println("Error closing ResultSet: getContentIdsforArticleId(" + article_id + ")");
+				System.out
+						.println("Error closing ResultSet: getContentIdsforArticleId("
+								+ article_id + ")");
 			}
 			db_controller.closeConnectionStatement();
 		}
 
-        return content_ids;
-    }
+		return content_ids;
+	}
 
-    public String getDateChangeForContentId(int content_id) {       
-    	String date_change = "";
-    	
-    	query = "Select date_change from wiki_content where content_id = '" + content_id + "'";
-        try {
+	public String getDateChangeForContentId(int content_id) {
+		String date_change = "";
+
+		query = "Select date_change from mobilewikia.wiki_content where content_id = '"
+				+ content_id + "'";
+		try {
 			rs = db_controller.getResultSet(query);
-			
-	        if (rs != null && rs.next()) {
-	        	date_change = rs.getString("date_change");
-	        }
-		
-        } catch (SQLException e) {
+
+			if (rs != null && rs.next()) {
+				date_change = rs.getString("date_change");
+			}
+
+		} catch (SQLException e) {
 			System.err.println(e.toString());
 			System.out.println("Error executing the Query: " + query);
-		
-        } finally {
+
+		} finally {
 			try {
 				if (rs != null) {
 					rs.close();
 				}
-			
+
 			} catch (SQLException e) {
 				System.err.println(e.toString());
-				System.out.println("Error closing ResultSet: getDateChangeForContentId(" + content_id + ")");
+				System.out
+						.println("Error closing ResultSet: getDateChangeForContentId("
+								+ content_id + ")");
 			}
 			db_controller.closeConnectionStatement();
 		}
 
-        return date_change;
-    }
+		return date_change;
+	}
 
-    public int getArticleIdForContentId(int content_id) {
-    	int article_id = -1;
-    	
-    	query = "Select article_id from wiki_content where content_id = '" + content_id + "'";
-        try {
+	public int getArticleIdForContentId(int content_id) {
+		int article_id = -1;
+
+		query = "Select article_id from mobilewikia.wiki_content where content_id = '"
+				+ content_id + "'";
+		try {
 			rs = db_controller.getResultSet(query);
-			
-	        if (rs != null && rs.next()) {
-	        	article_id = rs.getInt("article_id");
-	        	
-	        }
-		
-        } catch (SQLException e) {
+
+			if (rs != null && rs.next()) {
+				article_id = rs.getInt("article_id");
+
+			}
+
+		} catch (SQLException e) {
 			System.err.println(e.toString());
 			System.out.println("Error executing the Query: " + query);
-		
-        } finally {
+
+		} finally {
 			try {
 				if (rs != null) {
 					rs.close();
 				}
-			
+
 			} catch (SQLException e) {
 				System.err.println(e.toString());
-				System.out.println("Error closing ResultSet: getArticleIdForContentId(" + content_id + ")");
+				System.out
+						.println("Error closing ResultSet: getArticleIdForContentId("
+								+ content_id + ")");
 			}
 			db_controller.closeConnectionStatement();
 		}
 
-        return article_id;
-    }
+		return article_id;
+	}
 
-    public String getContentForContentId(int content_id) {
-    	String content = "";
-    	
-    	query = "Select content from wiki_content where content_id = '" + content_id + "'";
-        try {
+	public String getContentForContentId(int content_id) {
+		String content = "";
+
+		query = "Select content from mobilewikia.wiki_content where content_id = '"
+				+ content_id + "'";
+		try {
 			rs = db_controller.getResultSet(query);
-			
-	        if (rs != null && rs.next()) {
-	        	content = rs.getString("content");
-	        	
-	        }
-		
-        } catch (SQLException e) {
+
+			if (rs != null && rs.next()) {
+				content = rs.getString("content");
+
+			}
+
+		} catch (SQLException e) {
 			System.err.println(e.toString());
 			System.out.println("Error executing the Query: " + query);
-		
-        } finally {
+
+		} finally {
 			try {
 				if (rs != null) {
 					rs.close();
 				}
-			
+
 			} catch (SQLException e) {
 				System.err.println(e.toString());
-				System.out.println("Error closing ResultSet: getContentForContentId(" + content_id + ")");
+				System.out
+						.println("Error closing ResultSet: getContentForContentId("
+								+ content_id + ")");
 			}
 			db_controller.closeConnectionStatement();
 		}
 
-        return content;
-    }
+		return content;
+	}
 
-    public String getTagForContentId(int content_id) {
-        String tag = "";
+	public String getTagForContentId(int content_id) {
+		String tag = "";
 
-    	query = "Select tag from wiki_content where content_id = '" + content_id + "'";
-        try {
+		query = "Select tag from mobilewikia.wiki_content where content_id = '"
+				+ content_id + "'";
+		try {
 			rs = db_controller.getResultSet(query);
-			
-	        if (rs != null && rs.next()) {
-	        	tag = rs.getString("content");
-	        	
-	        }
-		
-        } catch (SQLException e) {
+
+			if (rs != null && rs.next()) {
+				tag = rs.getString("content");
+
+			}
+
+		} catch (SQLException e) {
 			System.err.println(e.toString());
 			System.out.println("Error executing the Query: " + query);
-		
-        } finally {
+
+		} finally {
 			try {
 				if (rs != null) {
 					rs.close();
 				}
-			
+
 			} catch (SQLException e) {
 				System.err.println(e.toString());
-				System.out.println("Error closing ResultSet: getTagForContentId(" + content_id + ")");
+				System.out
+						.println("Error closing ResultSet: getTagForContentId("
+								+ content_id + ")");
 			}
 			db_controller.closeConnectionStatement();
 		}
 
-        return tag;
-    }
+		return tag;
+	}
 }
