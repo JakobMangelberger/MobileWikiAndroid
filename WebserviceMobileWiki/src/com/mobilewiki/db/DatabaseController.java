@@ -26,6 +26,8 @@ public class DatabaseController implements IDatabaseController {
 	}
 
 	private void connectDB() {
+		System.out.println("connectDB");
+		
 		try {
 			Class.forName(this.db_driver);
 
