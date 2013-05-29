@@ -7,12 +7,18 @@
     <string name="no_records">There are no records in the table</string>
     <string name="search_hint">Search the records</string>
     <string name="search">Search</string>
+    <string name="search_type_all">Match all</string>
+    <string name="search_type_one">Match one</string>
+    <string-array name="search_sort">
+        <item>Sort by Title (asc)</item>
+        <item>Sort by Title (desc)</item>
+    </string-array>
     <string name="clear">Clear</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_search">SearchActivity</string>
-    <string name="noentries">Keine Einträge vorhanden</string>
+    <string name="no_entries">No entries found.</string>
     
 	<color name="grey">#DDDDDD</color>
 	<color name="white">#FFFFFF</color>
