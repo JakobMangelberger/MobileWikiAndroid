@@ -1,8 +1,10 @@
 package com.mobilewiki;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Html.ImageGetter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +20,16 @@ public class PreviewActivity extends Activity{
         setContentView(R.layout.preview_edit); // TODO layout 
     }
     
+	private ImageGetter imgGetter = new ImageGetter() {
+		public Drawable getDrawable(String source) {
+			Drawable drawable = getResources().getDrawable(
+					R.drawable.borat);
+			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(),
+					drawable.getIntrinsicHeight());
+			return drawable;
+		}
+	};
+    
     @Override
     public void onStart(){
     	 super.onStart();
@@ -32,7 +44,7 @@ public class PreviewActivity extends Activity{
          
          TextView article_cont = (TextView) findViewById(R.id.article_content);
         
-         article_cont.setText(Html.fromHtml(previewText));
+         article_cont.setText(Html.fromHtml(previewText, imgGetter, null));
          
     }
     

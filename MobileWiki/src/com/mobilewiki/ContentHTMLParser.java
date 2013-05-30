@@ -5,19 +5,8 @@ import java.util.regex.Pattern;
 
 import android.util.Log;
 
-public class ContentHTMLParser {
+public class ContentHTMLParser implements IHTMLConstants{
     static ContentHTMLParser instance_;
-    
-	private static String HTML_START_TITLE_TAG = "<h2>";
-	private static String HTML_END_TITLE_TAG = "</h2>";
-	private static String CUSTOM_START_TITLE_TAG = "<TITLE-START>\n";
-	private static String CUSTOM_END_TITLE_TAG = "\n<TITLE-END>\n\n";
-	
-	private static String HTML_START_PARA_TAG = "<p>";
-	private static String HTML_END_PARA_TAG = "<p/>";
-	private static String CUSTOM_START_PARA_TAG = "<PARAGRAPH-START>\n";
-	private static String CUSTOM_END_PARA_TAG = "\n<PARAGRAPH-END>\n\n";
-
 	public static ContentHTMLParser getInstance() {
 		if (instance_ == null) {
 			instance_ = new ContentHTMLParser();
@@ -30,7 +19,7 @@ public class ContentHTMLParser {
 		String destination = source;
 		destination = parseTags(destination, HTML_START_TITLE_TAG, CUSTOM_START_TITLE_TAG, HTML_END_TITLE_TAG, CUSTOM_END_TITLE_TAG);
 		destination = parseTags(destination, HTML_START_PARA_TAG,  CUSTOM_START_PARA_TAG,  HTML_END_PARA_TAG,  CUSTOM_END_PARA_TAG);
-		
+		destination = parseTags(destination, HTML_START_BOLD_TAG,  CUSTOM_START_BOLD_TAG,  HTML_END_BOLD_TAG,  CUSTOM_END_BOLD_TAG);
 		return destination;
 	}
 	
@@ -39,7 +28,7 @@ public class ContentHTMLParser {
 		String destination = source;
 		destination = parseTags(destination, CUSTOM_START_TITLE_TAG, HTML_START_TITLE_TAG, CUSTOM_END_TITLE_TAG, HTML_END_TITLE_TAG);
 		destination = parseTags(destination, CUSTOM_START_PARA_TAG,  HTML_START_PARA_TAG,  CUSTOM_END_PARA_TAG,  HTML_END_PARA_TAG);
-		
+		destination = parseTags(destination, CUSTOM_START_BOLD_TAG,  HTML_START_BOLD_TAG,  CUSTOM_END_BOLD_TAG,  HTML_END_BOLD_TAG);
 		return destination;
 	}
 

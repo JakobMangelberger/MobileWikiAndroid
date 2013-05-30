@@ -11,10 +11,25 @@
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="Save"/>
-        <item
+     <item
         android:id="@+id/cancel_edit"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="Cancel"/>
+     <item
+        android:id="@+id/add_paragraph"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="Add paragraph"/>
+     <item
+        android:id="@+id/add_bold"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="Add bold"/>
+      <item
+        android:id="@+id/add_image"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="Add image"/>
 
 </menu>
