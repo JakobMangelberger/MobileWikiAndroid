@@ -24,11 +24,15 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		setContentView(R.layout.editor_layout); // TODO layout
 		ed_view = (EditText) findViewById(R.id.edit_text);
 
-		String cnt = ContentHTMLParser.getInstance().parseFromHtmlToCustom(
-				title + str + "<p>Das ist ein <b>Borat!!</b></p>" + "<img src=\"borat.jpeg\"/>");
-
+		String cnt = ContentHTMLParser.getInstance().parseFromHtmlToCustom(title + 
+				str + "<p>Das ist ein <b>Borat!!</b></p>" + "<img src=\"borat.jpeg\"/>" + 
+		title + str + str);
+		
 		ed_view.setText(cnt);
 
+				
+
+		ed_view.setText(cnt);
 	}
 
 	@Override
