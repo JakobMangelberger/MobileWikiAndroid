@@ -39,7 +39,6 @@ public class PreviewActivity extends Activity{
         	 previewText = parameters.getString("PREVIEW_TEXT");
          }
          else {
-        		// return;
          }
          
          TextView article_cont = (TextView) findViewById(R.id.article_content);

@@ -20,6 +20,7 @@ public class ContentHTMLParser implements IHTMLConstants{
 		destination = parseTags(destination, HTML_START_TITLE_TAG, CUSTOM_START_TITLE_TAG, HTML_END_TITLE_TAG, CUSTOM_END_TITLE_TAG);
 		destination = parseTags(destination, HTML_START_PARA_TAG,  CUSTOM_START_PARA_TAG,  HTML_END_PARA_TAG,  CUSTOM_END_PARA_TAG);
 		destination = parseTags(destination, HTML_START_BOLD_TAG,  CUSTOM_START_BOLD_TAG,  HTML_END_BOLD_TAG,  CUSTOM_END_BOLD_TAG);
+		destination = parseTags(destination, HTML_START_IMAGE_TAG,  CUSTOM_START_IMAGE_TAG,  HTML_END_IMAGE_TAG,  CUSTOM_END_IMAGE_TAG);
 		return destination;
 	}
 	
@@ -29,6 +30,8 @@ public class ContentHTMLParser implements IHTMLConstants{
 		destination = parseTags(destination, CUSTOM_START_TITLE_TAG, HTML_START_TITLE_TAG, CUSTOM_END_TITLE_TAG, HTML_END_TITLE_TAG);
 		destination = parseTags(destination, CUSTOM_START_PARA_TAG,  HTML_START_PARA_TAG,  CUSTOM_END_PARA_TAG,  HTML_END_PARA_TAG);
 		destination = parseTags(destination, CUSTOM_START_BOLD_TAG,  HTML_START_BOLD_TAG,  CUSTOM_END_BOLD_TAG,  HTML_END_BOLD_TAG);
+		destination = parseTags(destination, CUSTOM_START_IMAGE_TAG,  HTML_START_IMAGE_TAG,  CUSTOM_END_IMAGE_TAG,  HTML_END_IMAGE_TAG);
+		
 		return destination;
 	}
 

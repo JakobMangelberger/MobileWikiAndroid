@@ -24,11 +24,11 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		setContentView(R.layout.editor_layout); // TODO layout
 		ed_view = (EditText) findViewById(R.id.edit_text);
 
-		String cnt = ContentHTMLParser.getInstance().parseFromHtmlToCustom(
-				title + str + "<p>Das ist ein <b>Borat!!</b></p>" + "<img src=\"borat.jpeg\"/>");
-
+		String cnt = ContentHTMLParser.getInstance().parseFromHtmlToCustom(title + 
+				str + "<p>Das ist ein <b>Borat!!</b></p>" + "<img src=\"borat.jpeg\"/>" + 
+		title + str + str);
+		
 		ed_view.setText(cnt);
-
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 			addTagsToContent(1);
 			return super.onOptionsItemSelected(item);
 		case R.id.add_image:
-
+			addTagsToContent(3);
 			return super.onOptionsItemSelected(item);
 		case R.id.preview_art:
 			Intent intent = new Intent(EditorActivity.this,
@@ -112,6 +112,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 			temp_pos = first_part.length() + CUSTOM_START_TITLE_TAG.length();
 			break;
 		case 3:
+			
 			break;
 		default:
 			break;

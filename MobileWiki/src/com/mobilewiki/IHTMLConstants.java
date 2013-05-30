@@ -17,4 +17,10 @@ public interface IHTMLConstants {
 	static String CUSTOM_START_PARA_TAG = "<paragraph-start>\n";
 	static String CUSTOM_END_PARA_TAG = "\n<paragraph-end>\n\n";
 	
+	static String HTML_START_IMAGE_TAG = "<img src=\"";
+	static String HTML_END_IMAGE_TAG = "\"/>";
+	static String CUSTOM_START_IMAGE_TAG = "<image-start>\n";
+	static String CUSTOM_END_IMAGE_TAG = "\n<image-end>\n";
+
+	
 }
