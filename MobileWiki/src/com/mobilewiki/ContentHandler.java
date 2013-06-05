@@ -11,7 +11,7 @@ package com.mobilewiki;
  * parsed (XML, HTML)
  *
  */
-public class ContentHandler {
+public class ContentHandler  { 
 
 	private int layout_;
 	private String alignment_;
