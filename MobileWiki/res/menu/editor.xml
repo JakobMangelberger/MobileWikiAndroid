@@ -31,5 +31,10 @@
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="Add image"/>
+       <item
+        android:id="@+id/add_newline"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="Add new line"/>
 
 </menu>

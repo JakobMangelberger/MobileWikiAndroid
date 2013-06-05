@@ -44,8 +44,6 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		} else {
 			article_id = Integer.parseInt(editorID);
 		}
-
-		
 	}
 
 	@Override
@@ -66,6 +64,9 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 			return super.onOptionsItemSelected(item);
 		case R.id.add_image:
 			addTagsToContent(3);
+			return super.onOptionsItemSelected(item);
+		case R.id.add_newline:
+			addTagsToContent(4);
 			return super.onOptionsItemSelected(item);
 		case R.id.preview_art:
 			Intent intent = new Intent(EditorActivity.this,
@@ -115,6 +116,10 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 			new_string = first_part + CUSTOM_START_IMAGE_TAG
 			+ CUSTOM_END_IMAGE_TAG + end_part;
 			temp_pos = first_part.length() + CUSTOM_START_IMAGE_TAG.length();
+			break;
+		case 4:
+			new_string = first_part + CUSTOM_BREAKLINE_TAG + end_part;
+			temp_pos = first_part.length() + CUSTOM_BREAKLINE_TAG.length();
 			break;
 		default:
 			break;
