@@ -7,6 +7,7 @@
     <string name="no_records">There are no records in the table</string>
     <string name="search_hint">Search the records</string>
     <string name="search">Search</string>
+    <string name="About">About</string>
     <string name="search_type_all">Match all</string>
     <string name="search_type_one">Match one</string>
     <string-array name="search_sort">

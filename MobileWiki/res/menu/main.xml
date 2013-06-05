@@ -8,14 +8,9 @@
         android:title="Edit"/>
     
     <item
-        android:id="@+id/search_record"
+        android:id="@+id/about_app"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/search"/>
-    <item
-        android:id="@+id/clear_recent_suggestions"
-        android:orderInCategory="100"
-        android:showAsAction="ifRoom|withText"
-        android:title="@string/clear"/>
+        android:title="@string/About"/>
 
 </menu>
