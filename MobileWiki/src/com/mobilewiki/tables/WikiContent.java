@@ -1,9 +1,10 @@
 package com.mobilewiki.tables;
 
-import android.R;
-import com.mobilewiki.SQLHandler;
+import com.mobilewiki.RequestHandler;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -16,12 +17,12 @@ public class WikiContent implements IWikiContent {
     private List<String> tags;
 	
 	public WikiContent(int content_id) {
-        SQLHandler sqlHandler = SQLHandler.getInstance();
+        RequestHandler sqlHandler = RequestHandler.getInstance();
 		this.content_id = content_id;
-		this.article_id = sqlHandler.get_article_id_for_content(content_id);
-		this.text = sqlHandler.get_text_for_content(content_id);
-		this.date_change = sqlHandler.get_timestamp_for_content(content_id);
-        this.tags = sqlHandler.get_tags_for_content(content_id);
+		this.article_id = sqlHandler.getArticleIdForContentId(content_id);
+		this.text = sqlHandler.getContentForContentId(content_id);
+		this.date_change = Timestamp.valueOf(sqlHandler.getDateChangeForContentId(content_id));
+        this.tags = Arrays.asList(sqlHandler.getTagForContentId(content_id).split(" "));
 	}
 
     public WikiContent(int content_id, int article_id, String text, List<String> tags) {

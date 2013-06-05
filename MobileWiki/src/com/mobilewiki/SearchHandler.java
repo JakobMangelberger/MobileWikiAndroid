@@ -22,12 +22,12 @@ public class SearchHandler {
     }
 
     public List<IWikiArticle> search_articles(String phrase, boolean allKeywords) {
-        SQLHandler sqlHandler = SQLHandler.getInstance();
-        int[] ids = sqlHandler.get_ids();
+        RequestHandler sqlHandler = RequestHandler.getInstance();
+        List<Integer> ids = sqlHandler.getArticleIds();
         String[] keywords = phrase.split(" ");
 
         List<IWikiArticle> articles = new ArrayList<IWikiArticle>();
-        for (int i = 0; i < ids.length; i++) {
+        for (int i = 0; i < ids.size(); i++) {
             IWikiArticle tempArticle = new WikiArticle(i);
             IWikiContent tempContent = new WikiContent(tempArticle.getLastContentId());
             if (!allKeywords) {
