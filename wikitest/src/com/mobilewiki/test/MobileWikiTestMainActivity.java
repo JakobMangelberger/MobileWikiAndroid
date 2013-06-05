@@ -1,13 +1,17 @@
 package com.mobilewiki.test;
 
 import com.mobilewiki.MainActivity;
+import com.mobilewiki.PreviewActivity;
 import com.mobilewiki.R;
 import com.mobilewiki.SearchActivity;
 import com.mobilewiki.controls.StableArrayAdapter;
 
+import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 
+import android.view.KeyEvent;
+import android.view.Menu;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -92,6 +96,31 @@ public class MobileWikiTestMainActivity extends
 		}
 
 	}
+	
+	/* Press Search Button and start activity */
+	public void test_startMenuSearchActivity() {
+		activity = getActivity();
+		assertNotNull(activity);
+		Activity a = null;
+
+		try {
+			// Simulate a menu click in MainActivity that start ChildActivity for
+			// result:
+			Instrumentation.ActivityMonitor am = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
+
+			// Click the menu option
+			getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
+			getInstrumentation().invokeMenuActionSync(activity, com.mobilewiki.R.id.edit_article, 0);
+
+			a = getInstrumentation().waitForMonitorWithTimeout(am, 1000);
+			assertEquals(false, getInstrumentation().checkMonitorHit(am, 1));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (a != null)
+			  a.finish();
+		}
+	}
 
 	/* Execute search with query that should fail */
 	public void test_executeSearchNoResults() {
@@ -156,9 +185,9 @@ public class MobileWikiTestMainActivity extends
 	}
 
 	public void test_executeSearches() {
-		executeSearch("Hallo");
-		executeSearch("HUHU");
-		executeSearch("Test");
+		executeSearch("tag1");
+		executeSearch("Tag2");
+		//executeSearch("Test");
 	}
 
 	/* Execute search with query that should fail */
@@ -199,7 +228,6 @@ public class MobileWikiTestMainActivity extends
 		getInstrumentation().waitForIdleSync();
 		SearchActivity childActivity = (SearchActivity) getInstrumentation()
 				.waitForMonitorWithTimeout(activityMonitor, 5);
-		// ChildActivity is created and gain focus on screen:
 		assertNotNull(childActivity);
 		try {
 			assertEquals(textViewQuery.getText(), query);
