@@ -1,5 +1,10 @@
 package com.mobilewiki.webservice;
 
+import java.io.IOException;
+
+import org.restlet.resource.ClientResource;
+import org.restlet.resource.ResourceException;
+
 public class Client {
 
 	public static void main(String[] args) throws Exception {
@@ -14,8 +19,7 @@ public class Client {
 //				.respondMessage(request);
 //		System.out.println("Response : " + response.get_return());
 
-		
-		
+		/*
 		com.mobilewiki.webservice.MobileWikiStub.GetArticleIds request = new com.mobilewiki.webservice.MobileWikiStub.GetArticleIds();
 		
 		// Invoking the service
@@ -30,10 +34,23 @@ public class Client {
 					System.out.println("Response : id = '" + article_ids[i] + "'");
 				}
 			}
-			
 		}
-		//} catch (Exception e) {
-		//	System.out.println("Error: " + e.toString());
-		//}
+		*/
+		
+		// Create the client resource  
+		ClientResource resource = new ClientResource("http://localhost:8080");  
+ 
+		// Write the response entity on the console
+		try {
+			resource.get().write(System.out);
+		} catch (ResourceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
 	}
+	
+	
 }
