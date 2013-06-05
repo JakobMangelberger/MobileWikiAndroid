@@ -8,7 +8,7 @@
         android:title="Edit"/>
     
     <item
-        android:id="@+id/about_app"
+        android:id="@+id/about"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="@string/About"/>

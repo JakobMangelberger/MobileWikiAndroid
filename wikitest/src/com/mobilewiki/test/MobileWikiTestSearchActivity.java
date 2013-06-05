@@ -19,7 +19,6 @@ ActivityInstrumentationTestCase2<SearchActivity>{
 
 	protected void setUp() throws Exception {
 		super.setUp();
-
 	}
 
 	public void test_view() {
