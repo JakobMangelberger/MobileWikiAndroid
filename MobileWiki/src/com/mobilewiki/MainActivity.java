@@ -3,6 +3,7 @@ package com.mobilewiki;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Html.ImageGetter;
@@ -112,6 +113,9 @@ public class MainActivity extends Activity {
 			intent.putExtras(parameters);
 			startActivity(intent);
 			return true;
+		case R.id.about_app:
+            Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("http://wikiapp.lima-city.de/"));
+            startActivity(browser);
 		default:
 			return super.onOptionsItemSelected(item);
 		}

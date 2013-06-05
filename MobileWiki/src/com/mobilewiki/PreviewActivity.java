@@ -7,11 +7,7 @@ import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class PreviewActivity extends Activity{
 
@@ -20,7 +16,7 @@ public class PreviewActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preview_edit); // TODO layout 
     }
-    
+     
 	private ImageGetter imgGetter = new ImageGetter() {
 		public Drawable getDrawable(String source) {
 			Drawable drawable = getResources().getDrawable(

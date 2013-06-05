@@ -112,7 +112,9 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 			temp_pos = first_part.length() + CUSTOM_START_TITLE_TAG.length();
 			break;
 		case 3:
-			
+			new_string = first_part + CUSTOM_START_IMAGE_TAG
+			+ CUSTOM_END_IMAGE_TAG + end_part;
+			temp_pos = first_part.length() + CUSTOM_START_IMAGE_TAG.length();
 			break;
 		default:
 			break;
