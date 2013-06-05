@@ -50,10 +50,11 @@ public class PreviewActivity extends Activity{
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.editor, menu); 
+        getMenuInflater().inflate(R.menu.preview, menu); 
         return true;
     } 
     
+    /*
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle item selection
@@ -72,4 +73,5 @@ public class PreviewActivity extends Activity{
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
+	*/
 }
