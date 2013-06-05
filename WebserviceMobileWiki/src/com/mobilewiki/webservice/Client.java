@@ -1,39 +1,38 @@
 package com.mobilewiki.webservice;
 
+import org.json.JSONObject;
+import org.restlet.data.MediaType;
+import org.restlet.ext.json.JsonRepresentation;
+import org.restlet.representation.Representation;
+import org.restlet.resource.ClientResource;
+
 public class Client {
 
 	public static void main(String[] args) throws Exception {
-		MobileWikiStub stub = new MobileWikiStub();
-
-//		// Creating the request
-//		com.mobilewiki.webservice.MobileWikiStub.RespondMessage request = new com.mobilewiki.webservice.MobileWikiStub.RespondMessage();
-//		request.setMessage("Dies ist ein Test");
-//
-//		// Invoking the service
-//		com.mobilewiki.webservice.MobileWikiStub.RespondMessageResponse response = stub
-//				.respondMessage(request);
-//		System.out.println("Response : " + response.get_return());
-
-		
-		
-		com.mobilewiki.webservice.MobileWikiStub.GetArticleIds request = new com.mobilewiki.webservice.MobileWikiStub.GetArticleIds();
-		
-		// Invoking the service
-		//try {
-		com.mobilewiki.webservice.MobileWikiStub.GetArticleIdsResponse response = stub.getArticleIds(request);
-		
-		if(response != null){
-			int[] article_ids = response.get_return();
+		// Create the client resource  
+		ClientResource resource = new ClientResource("http://localhost:8080/WebserviceMobileWiki");  
+ 
+		// Write the response entity on the console
+		try {
+			JSONObject jsonobject_request = new JSONObject();
+			jsonobject_request.put("function", "getTitleForArticleId");
+			jsonobject_request.put("article_id", "2");
 			
-			if (article_ids.length > 0) {
-				for (int i = 0; i < article_ids.length; i++) {
-					System.out.println("Response : id = '" + article_ids[i] + "'");
-				}
+			JsonRepresentation jsonrepresentation_request = new JsonRepresentation(jsonobject_request);
+			
+			Representation representation_response = resource.post(jsonrepresentation_request);
+			
+			if (representation_response.getMediaType().equals(MediaType.APPLICATION_JSON)) {
+				JsonRepresentation jsonrepresentation_response = new JsonRepresentation(representation_response);
+				JSONObject jsonobject_response = jsonrepresentation_response.getJsonObject();
+				
+				String result = jsonobject_response.get("result").toString();
+				System.out.println(result);
 			}
-			
-		}
-		//} catch (Exception e) {
-		//	System.out.println("Error: " + e.toString());
-		//}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 }

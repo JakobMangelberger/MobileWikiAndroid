@@ -43,7 +43,7 @@ public class MobileWiki {
 				System.err.println(e.toString());
 				System.out.println("Error closing ResultSet: getArticleIds()");
 			}
-			db_controller.closeConnectionStatement();
+			//db_controller.closeConnectionStatement();
 		}
 
 		return article_ids;
@@ -77,7 +77,7 @@ public class MobileWiki {
 						.println("Error closing ResultSet: getTitleForArticleId("
 								+ article_id + ")");
 			}
-			db_controller.closeConnectionStatement();
+			//db_controller.closeConnectionStatement();
 		}
 
 		return title;
@@ -85,7 +85,7 @@ public class MobileWiki {
 
 	public List<Integer> getContentIdsforArticleId(int article_id) {
 		List<Integer> content_ids = new ArrayList<Integer>();
-
+		
 		query = "Select content_id from mobilewikia.wiki_content where article_id = '"
 				+ article_id + "'";
 		try {
@@ -113,7 +113,7 @@ public class MobileWiki {
 						.println("Error closing ResultSet: getContentIdsforArticleId("
 								+ article_id + ")");
 			}
-			db_controller.closeConnectionStatement();
+			//db_controller.closeConnectionStatement();
 		}
 
 		return content_ids;
@@ -147,7 +147,7 @@ public class MobileWiki {
 						.println("Error closing ResultSet: getDateChangeForContentId("
 								+ content_id + ")");
 			}
-			db_controller.closeConnectionStatement();
+			//db_controller.closeConnectionStatement();
 		}
 
 		return date_change;
@@ -182,7 +182,7 @@ public class MobileWiki {
 						.println("Error closing ResultSet: getArticleIdForContentId("
 								+ content_id + ")");
 			}
-			db_controller.closeConnectionStatement();
+			//db_controller.closeConnectionStatement();
 		}
 
 		return article_id;
@@ -217,7 +217,7 @@ public class MobileWiki {
 						.println("Error closing ResultSet: getContentForContentId("
 								+ content_id + ")");
 			}
-			db_controller.closeConnectionStatement();
+			//db_controller.closeConnectionStatement();
 		}
 
 		return content;
@@ -252,7 +252,7 @@ public class MobileWiki {
 						.println("Error closing ResultSet: getTagForContentId("
 								+ content_id + ")");
 			}
-			db_controller.closeConnectionStatement();
+			//db_controller.closeConnectionStatement();
 		}
 
 		return tag;
