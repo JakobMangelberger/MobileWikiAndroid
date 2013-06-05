@@ -28,4 +28,11 @@ ActivityInstrumentationTestCase2<SearchActivity>{
 		assertNotNull(listView);
 	}
 	
+	public void test_testCase2() {
+		activity = getActivity();
+		listView = (ListView) activity.findViewById(R.id.listView1);
+
+		assertNotNull(listView);
+	}
+	
 }

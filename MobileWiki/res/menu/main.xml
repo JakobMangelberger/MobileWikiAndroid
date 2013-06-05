@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
      <item
         android:id="@+id/edit_article"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
-        android:title="Edit"/>
-    
+        android:title="Edit"/>    
     <item
         android:id="@+id/about_app"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="@string/About"/>
+    <!-- <item
+        android:id="@+id/clear_recent_suggestions"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/clear"/> -->
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/about"/>
 
 </menu>

@@ -104,18 +104,19 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.edit_article:
-			Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+			intent = new Intent(MainActivity.this, EditorActivity.class);
 			Bundle parameters = new Bundle(1);
 			parameters.putString("ARTICLE_ID", "1");
 			intent.putExtras(parameters);
 			startActivity(intent);
 			return true;
-		case R.id.about_app:
-            Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("http://wikiapp.lima-city.de/"));
-            startActivity(browser);
+		case R.id.about:
+            intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
 		default:
 			return super.onOptionsItemSelected(item);
 		}
