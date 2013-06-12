@@ -433,10 +433,12 @@ public class MobileWiki {
 		return delete_state;
 	}
 
-    public Map<String, List<String>> getAllTitlesWithTags() {
-        Map<String, List<String>> result = new HashMap<String, List<String>>();
+    public String getAllTitlesWithTags() {
+        List<String> result = new ArrayList<>();
 
-        query = "SELECT a.article_id, a.title, c.tag, c.date_change FROM mobilewikia.wiki_article a, mobilewikia.wiki_content c WHERE c.article_id = a.article_id";
+        query = "SELECT a.article_id, a.title, c.tag, c.date_change " +
+                "FROM mobilewikia.wiki_article a, mobilewikia.wiki_content c " +
+                "WHERE c.article_id = a.article_id";
 
         try {
             rs = db_controller.getResultSet(query);
@@ -444,11 +446,8 @@ public class MobileWiki {
                 return null;
 
             while (rs.next()) {
-                List<String> tags = new ArrayList<String>();
-                for(String tag : rs.getString("c.tag").split(" ")) {
-                    tags.add(tag);
-                }
-                result.put(rs.getString("a.title"), tags);
+                result.add(rs.getString("a.title"));
+                result.add(rs.getString("c.tag"));
             }
 
         } catch (SQLException e) {
@@ -464,6 +463,12 @@ public class MobileWiki {
             }
         }
 
-        return result;
+        StringBuilder sb = new StringBuilder();
+        for(String item : result) {
+            sb.append(item);
+            sb.append('\n');
+        }
+
+        return sb.toString();
     }
 }

@@ -26,14 +26,14 @@ public class SearchHandler {
         RequestHandler sqlHandler = RequestHandler.getInstance();
         String[] keywords = phrase.split(" ");
 
-        Map<String, List<String>> allEntries = sqlHandler.get_all_titles_with_tags();
+        Map<String, String> allEntries = sqlHandler.get_all_titles_with_tags();
 
         if(null == allEntries) {
             return new ArrayList<String>();
         }
         List<String> articles = new ArrayList<String>();
         for (String entryTitle : allEntries.keySet()) {
-            List<String> tags = allEntries.get(entryTitle);
+            String[] tags = allEntries.get(entryTitle).split(" ");
 
             if (!allKeywords) {
                 for (String keyword : keywords) {

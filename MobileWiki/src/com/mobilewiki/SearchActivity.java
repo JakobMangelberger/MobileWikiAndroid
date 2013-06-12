@@ -74,8 +74,6 @@ public class SearchActivity extends Activity {
         EditText searchPhraseBox = (EditText) findViewById(R.id.search_text);
         searchPhraseBox.setText(searchPhrase);
 
-        performSearch();
-
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -134,24 +132,6 @@ public class SearchActivity extends Activity {
                 @Override
                 public int compare(String s, String s2) {
                     return s2.toLowerCase().compareTo(s.toLowerCase());
-                }
-            });
-        } else if (sortMode == 2) {
-            adapter.sort(new Comparator<String>() {
-                @Override
-                public int compare(String s, String s2) {
-                    IWikiArticle article1 = new WikiArticle(RequestHandler.getInstance().getArticleIdForTitle(s));
-                    IWikiArticle article2 = new WikiArticle(RequestHandler.getInstance().getArticleIdForTitle(s2));
-                    return article1.getLastContentTimestamp().compareTo(article2.getLastContentTimestamp());
-                }
-            });
-        } else if (sortMode == 3) {
-            adapter.sort(new Comparator<String>() {
-                @Override
-                public int compare(String s, String s2) {
-                    IWikiArticle article1 = new WikiArticle(RequestHandler.getInstance().getArticleIdForTitle(s2));
-                    IWikiArticle article2 = new WikiArticle(RequestHandler.getInstance().getArticleIdForTitle(s));
-                    return article1.getLastContentTimestamp().compareTo(article2.getLastContentTimestamp());
                 }
             });
         }

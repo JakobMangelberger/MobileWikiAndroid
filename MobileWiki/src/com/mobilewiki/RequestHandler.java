@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mobilewiki.controls.WebserviceAdapter;
@@ -97,7 +98,7 @@ public class RequestHandler {
 			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
 			
 			if (jsonobject_response.get("result") != null) {
-				result = (List<Integer>) jsonobject_response.get("result");
+				result = convertJsonArrayToArrayList((JSONArray) jsonobject_response.get("result"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -187,8 +188,10 @@ public class RequestHandler {
 	}
 	
     @SuppressWarnings("unchecked")
-	public Map<String, List<String>> get_all_titles_with_tags() {
-        Map<String, List<String>> result = new HashMap<String, List<String>>();
+    public Map<String, String> get_all_titles_with_tags() {
+        Map<String, String> result = new HashMap<String, String>();
+
+        String resultString;
 
         try {
             JSONObject jsonobject_request = new JSONObject();
@@ -197,7 +200,11 @@ public class RequestHandler {
             JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
 
             if (jsonobject_response.get("result") != null) {
-                result = (Map<String, List<String>>) jsonobject_response.get("result");
+                resultString = jsonobject_response.get("result").toString();
+                String[] resultArray = resultString.split("\n");
+                for(int i = 0; i < resultArray.length; i += 2) {
+                    result.put(resultArray[i], resultArray[i + 1]);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -205,4 +212,17 @@ public class RequestHandler {
 
         return result;
     }
+    
+	private ArrayList<Integer> convertJsonArrayToArrayList(JSONArray jsonArray) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for (int i = 0; i < jsonArray.length(); i++) {
+			try {
+				list.add(Integer.parseInt(jsonArray.get(i).toString()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 }
