@@ -3,9 +3,7 @@ package com.mobilewiki;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
@@ -32,12 +30,12 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		super.onCreate(savedInstanceState); 
+		setContentView(R.layout.activity_main); 
 	}
 
 	@Override
-	public void onStart() {
+	public void onStart() {  
 		super.onStart();
 		final EditText searchPhrase = (EditText) findViewById(R.id.search_text);
 

@@ -11,27 +11,32 @@
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="Save"/>
-     <item
+    <item
         android:id="@+id/cancel_edit"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="Cancel"/>
-     <item
+    <item
+        android:id="@+id/add_title"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="Add title"/>
+    <item
         android:id="@+id/add_paragraph"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="Add paragraph"/>
-     <item
+    <item
         android:id="@+id/add_bold"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="Add bold"/>
-      <item
+    <item
         android:id="@+id/add_image"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="Add image"/>
-       <item
+    <item
         android:id="@+id/add_newline"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
