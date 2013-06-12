@@ -1,6 +1,5 @@
 package com.mobilewiki;
 
-import android.util.Log;
 import com.mobilewiki.tables.IWikiArticle;
 import com.mobilewiki.tables.IWikiContent;
 import com.mobilewiki.tables.WikiArticle;

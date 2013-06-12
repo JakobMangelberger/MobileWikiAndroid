@@ -1,13 +1,20 @@
 package com.mobilewiki.webservice;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.MediaType;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
+
 public class Client {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 		ClientResource resource = new ClientResource("http://localhost:8080/WebserviceMobileWiki");  
  
@@ -31,5 +38,21 @@ public class Client {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
+		
+	}
+	
+	public static ArrayList<Integer> convertJsonArrayToArrayList(JSONArray jsonArray)
+	{
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for(int i=0; i < jsonArray.length(); i++)
+		{
+			try {
+				list.add(Integer.parseInt(jsonArray.get(i).toString()));
+			} catch (NumberFormatException | JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 }
