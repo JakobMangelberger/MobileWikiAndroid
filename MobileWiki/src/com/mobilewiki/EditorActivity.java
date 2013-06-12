@@ -26,6 +26,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 	private static int CASE_TITLE = 5;
 
 	private String content_of_the_article;
+	private int article_id;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		content_of_the_article = null;
 		if (null != parameters) {
 			content_of_the_article = parameters.getString("content");
+			article_id = parameters.getInt("article_id");
 			// Log.e("content", content_of_the_article);
 			if (content_of_the_article == null)
 				content_of_the_article = "";
@@ -100,7 +102,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		case R.id.save_art:
 			//Toast.makeText(this, "Article saved!", Toast.LENGTH_SHORT).show();
 			String htmlString = Html.toHtml((Spanned) ed_view.getText());
-			RequestHandler.getInstance().createContent(1, htmlString, "tag");
+			RequestHandler.getInstance().createContent(article_id, htmlString, "tag");
 			finish();
 			return super.onOptionsItemSelected(item);
 		case R.id.cancel_edit:
@@ -167,6 +169,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		// This overloads the syntax highlight ing
 		Log.e("I am ", "in rstore instance");
 		ed_view.setText(savedInstanceState.getString("Content"));
+		
 		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
 
 	}
