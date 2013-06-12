@@ -8,10 +8,16 @@ import java.util.List;
 import com.mobilewiki.db.DatabaseController;
 
 public class MobileWiki {
-	private DatabaseController db_controller = new DatabaseController();
+	private DatabaseController db_controller;
 	private String query = "";
 	private ResultSet rs = null;
 
+	public MobileWiki() {
+		if (db_controller == null) {
+			db_controller = new DatabaseController();
+		}
+	}
+	
 	public String respondMessage(String message) {
 		return "Received message: " + message;
 	}
@@ -19,13 +25,13 @@ public class MobileWiki {
 	public List<Integer> getArticleIds() {
 		List<Integer> article_ids = new ArrayList<Integer>();
 
-		query = "Select article_id from mobilewikia.wiki_article";
+		query = "Select Article_Id From mobilewikia.wiki_article";
 		try {
 			rs = db_controller.getResultSet(query);
 
 			if (rs != null) {
 				while (rs.next()) {
-					article_ids.add(rs.getInt("article_id"));
+					article_ids.add(rs.getInt("Article_Id"));
 				}
 			}
 
@@ -52,13 +58,12 @@ public class MobileWiki {
 	public String getTitleForArticleId(int article_id) {
 		String title = "";
 
-		query = "Select title from mobilewikia.wiki_article where article_id = '"
-				+ article_id + "'";
+		query = "Select Title From mobilewikia.wiki_article Where Article_id = '" + article_id + "'";
 		try {
 			rs = db_controller.getResultSet(query);
 
 			if (rs != null && rs.next()) {
-				title = rs.getString("title");
+				title = rs.getString("Title");
 			}
 			
 		} catch (SQLException e) {
@@ -86,13 +91,13 @@ public class MobileWiki {
 	public int getArticleIdForTitle(String title) {
 		int article_id = 0;
 
-		query = "Select article_id from mobilewikia.wiki_article where title = '"
+		query = "Select Article_id from mobilewikia.wiki_article Where Title = '"
 				+ title + "'";
 		try {
 			rs = db_controller.getResultSet(query);
 
 			if (rs != null && rs.next()) {
-				article_id = rs.getInt("article_id");
+				article_id = rs.getInt("Article_id");
 			}
 			
 		} catch (SQLException e) {
@@ -120,14 +125,14 @@ public class MobileWiki {
 	public List<Integer> getContentIdsforArticleId(int article_id) {
 		List<Integer> content_ids = new ArrayList<Integer>();
 		
-		query = "Select content_id from mobilewikia.wiki_content where article_id = '"
+		query = "Select Content_Id From mobilewikia.wiki_content Where Article_id = '"
 				+ article_id + "'";
 		try {
 			rs = db_controller.getResultSet(query);
 
 			if (rs != null) {
 				while (rs.next()) {
-					content_ids.add(rs.getInt("content_id"));
+					content_ids.add(rs.getInt("Content_Id"));
 				}
 			}
 
@@ -156,13 +161,13 @@ public class MobileWiki {
 	public String getDateChangeForContentId(int content_id) {
 		String date_change = "";
 
-		query = "Select date_change from mobilewikia.wiki_content where content_id = '"
+		query = "Select Date_Change From mobilewikia.wiki_content Where Content_id = '"
 				+ content_id + "'";
 		try {
 			rs = db_controller.getResultSet(query);
 
 			if (rs != null && rs.next()) {
-				date_change = rs.getString("date_change");
+				date_change = rs.getString("Date_Change");
 			}
 
 		} catch (SQLException e) {
@@ -190,13 +195,13 @@ public class MobileWiki {
 	public int getArticleIdForContentId(int content_id) {
 		int article_id = -1;
 
-		query = "Select article_id from mobilewikia.wiki_content where content_id = '"
+		query = "Select Article_Id From mobilewikia.wiki_content Where Content_id = '"
 				+ content_id + "'";
 		try {
 			rs = db_controller.getResultSet(query);
 
 			if (rs != null && rs.next()) {
-				article_id = rs.getInt("article_id");
+				article_id = rs.getInt("Article_Id");
 
 			}
 
@@ -225,13 +230,13 @@ public class MobileWiki {
 	public String getContentForContentId(int content_id) {
 		String content = "";
 
-		query = "Select content from mobilewikia.wiki_content where content_id = '"
+		query = "Select Content From mobilewikia.wiki_content Where Content_id = '"
 				+ content_id + "'";
 		try {
 			rs = db_controller.getResultSet(query);
 
 			if (rs != null && rs.next()) {
-				content = rs.getString("content");
+				content = rs.getString("Content");
 
 			}
 
@@ -260,14 +265,13 @@ public class MobileWiki {
 	public String getTagForContentId(int content_id) {
 		String tag = "";
 
-		query = "Select tag from mobilewikia.wiki_content where content_id = '"
+		query = "Select Tag From mobilewikia.wiki_content Where Content_Id = '"
 				+ content_id + "'";
 		try {
 			rs = db_controller.getResultSet(query);
 
 			if (rs != null && rs.next()) {
-				tag = rs.getString("content");
-
+				tag = rs.getString("Tag");
 			}
 
 		} catch (SQLException e) {
@@ -290,5 +294,140 @@ public class MobileWiki {
 		}
 
 		return tag;
+	}
+
+	public int createMain(String wiki_name, String logo_link) {
+		int main_id = -1;
+
+		query = "Insert Into mobilewikia.wiki_main (Wiki_Name, Logo_Link) Values ('" + wiki_name + "', '" + logo_link + "')";
+		try {
+			main_id = db_controller.executeUpdate(query);
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Insert: " + query);
+		}
+
+		return main_id;
+	}
+	
+	public int createArticle(String title) {
+		int article_id = -1;
+
+		query = "Insert Into mobilewikia.wiki_article (Title) Values ('" + title + "')";
+		try {
+			article_id = db_controller.executeUpdate(query);
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Insert: " + query);
+		}
+
+		return article_id;
+	}
+	
+	public int createContent(int article_id, String content, String tag) {
+		int content_id = -1;
+
+		query = "Insert Into mobilewikia.wiki_content (Article_Id, Content, Tag) Values ('" + article_id + "','" + content + "', '" + tag + "')";
+		try {
+			content_id = db_controller.executeUpdate(query);
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Insert: " + query);
+		}
+
+		return content_id;
+	}
+
+	public int editMain(int main_id, String wiki_name, String logo_link) {
+		int update_state = -1;
+
+		query = "Update mobilewikia.wiki_main Set Wiki_Name = '" + wiki_name + "', Logo_Link = '" + logo_link + "' Where Main_Id = '" + main_id + "'";
+		try {
+			update_state = db_controller.executeUpdate(query);
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Update: " + query);
+		}
+
+		return update_state;
+	}
+	
+	public int editArticle(int article_id, String title) {
+		int update_state = -1;
+
+		query = "Update mobilewikia.wiki_article Set Title = '" + title + "' Where Article_Id = '" + article_id + "'";
+		try {
+			update_state = db_controller.executeUpdate(query);
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Update: " + query);
+		}
+
+		return update_state;
+	}
+	
+	public int editContent(int content_id, int article_id, String content, String tag) {
+		int update_state = -1;
+
+		query = "Update mobilewikia.wiki_content Set Article_Id = '" + article_id + "', Content = '" + content + "', Tag = '" + tag + "' Where Content_Id = '" + content_id + "'";
+		try {
+			update_state = db_controller.executeUpdate(query);
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Update: " + query);
+		}
+
+		return update_state;
+	}
+	
+	public int deleteMain(int main_id) {
+		int delete_state = -1;
+
+		query = "Delete mobilewikia.wiki_main Where Main_Id = '" + main_id + "'";
+		try {
+			delete_state = db_controller.executeUpdate(query);
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Delete: " + query);
+		}
+
+		return delete_state;
+	}
+	
+	public int deleteArticle(int article_id) {
+		int delete_state = -1;
+
+		query = "Delete mobilewikia.wiki_article Where Article_Id = '" + article_id + "'";
+		try {
+			delete_state = db_controller.executeUpdate(query);
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Delete: " + query);
+		}
+
+		return delete_state;
+	}
+	
+	public int deleteContent(int content_id) {
+		int delete_state = -1;
+
+		query = "Delete mobilewikia.wiki_content Where Content_Id = '" + content_id + "'";
+		try {
+			delete_state = db_controller.executeUpdate(query);
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Delete: " + query);
+		}
+
+		return delete_state;
 	}
 }
