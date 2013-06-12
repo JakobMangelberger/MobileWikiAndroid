@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+	private TextView article_text_view;
 	private ImageGetter imgGetter = new ImageGetter() {
 		public Drawable getDrawable(String source) {
 			Drawable drawable = getResources().getDrawable(
@@ -42,6 +43,7 @@ public class MainActivity extends Activity {
 		super.onStart();
 		final EditText searchPhrase = (EditText) findViewById(R.id.search_text);
 
+
 		Bundle bundle = getIntent().getExtras();
 		int article_id = 1;
 		
@@ -55,6 +57,7 @@ public class MainActivity extends Activity {
 		article_text_view.setMovementMethod(new ScrollingMovementMethod());		
 
 		RequestHandler request_handler = RequestHandler.getInstance();	
+
 		
 		List<Integer> content_ids = request_handler.getContentIdsforArticleId(article_id);
 		String title = request_handler.getTitleForArticleId(article_id);
@@ -116,7 +119,7 @@ public class MainActivity extends Activity {
 		case R.id.edit_article:
 			intent = new Intent(MainActivity.this, EditorActivity.class);
 			Bundle parameters = new Bundle(1);
-			parameters.putString("ARTICLE_ID", "1");
+			parameters.putString("content", article_text_view.getText().toString());
 			intent.putExtras(parameters);
 			startActivity(intent);
 			return true;
