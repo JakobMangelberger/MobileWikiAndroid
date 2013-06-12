@@ -105,6 +105,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 			//Toast.makeText(this, "Article saved!", Toast.LENGTH_SHORT).show();
 			Spanned htmlString = ed_view.getText();
 			String to_send = htmlString.toString();
+			to_send = ContentHTMLParser.getInstance().parseFromCustomToHtml(to_send);
 			RequestHandler.getInstance().createContent(article_id, to_send, tags);
 			finish();
 			return super.onOptionsItemSelected(item);
