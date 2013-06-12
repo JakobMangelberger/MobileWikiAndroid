@@ -11,7 +11,7 @@ public class DatabaseController implements IDatabaseController {
 	private String db_username = "mobilewikia";
 	private String db_password = "sewm2013";
 	private String db_driver = "com.mysql.jdbc.Driver";
-	private String db_url = "jdbc:mysql://mobilewikia.unitedgosus.com";
+	private String db_url = "jdbc:mysql://localhost";
 	private Connection connection;
 	private Statement statement;
 
