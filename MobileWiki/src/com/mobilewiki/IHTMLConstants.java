@@ -24,7 +24,8 @@ public interface IHTMLConstants {
 	static String CUSTOM_END_IMAGE_TAG = "<image-end>";
 
 	static String HTML_BREAKLINE_TAG = "<br/>";
-	static String CUSTOM_BREAKLINE_TAG = "<empty-line>";
+	static String CUSTOM_BREAKLINE_TAG = "<break-newline-here>";
+
 
 	static String NEWLINE = "\n";
 	static String DOUBLE_NEWLINE = NEWLINE + NEWLINE;
