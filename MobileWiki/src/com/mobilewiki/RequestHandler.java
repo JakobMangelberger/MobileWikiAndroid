@@ -14,11 +14,10 @@ import com.mobilewiki.controls.WebserviceAdapter;
 public class RequestHandler {
 	
     private static RequestHandler _instance;
-    private static WebserviceAdapter webserivce_adapter;
+    private static WebserviceAdapter webserivce_adapter = new WebserviceAdapter();
     
     public static RequestHandler getInstance() {
         if(null == _instance) {
-        	 webserivce_adapter = new WebserviceAdapter();
             _instance = new RequestHandler();
         }
         return _instance;
@@ -28,6 +27,7 @@ public class RequestHandler {
         _instance = this;
     }
 
+    @SuppressWarnings("unchecked")
 	public List<Integer> getArticleIds() {
     	List<Integer> result = new ArrayList<Integer>();
     	
@@ -38,8 +38,7 @@ public class RequestHandler {
 			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
 			
 			if (jsonobject_response.get("result") != null) {
-				//result = (List<Integer>) jsonobject_response.get("result");
-				result = convertJsonArrayToArrayList((JSONArray) jsonobject_response.get("result"));
+				result = (List<Integer>) jsonobject_response.get("result");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,6 +87,7 @@ public class RequestHandler {
         return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Integer> getContentIdsforArticleId(int article_id) {
     	List<Integer> result = new ArrayList<Integer>();
     	
