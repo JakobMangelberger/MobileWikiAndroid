@@ -3,7 +3,9 @@ package com.mobilewiki.webservice;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.mobilewiki.db.DatabaseController;
 
@@ -291,4 +293,38 @@ public class MobileWiki {
 
 		return tag;
 	}
+
+    public Map<String, List<String>> getAllTitlesWithTags() {
+        Map<String, List<String>> result = new HashMap<String, List<String>>();
+
+        query = "SELECT a.article_id, a.title, c.tag, c.date_change FROM mobilewikia.wiki_article a, mobilewikia.wiki_content c WHERE c.article_id = a.article_id";
+
+        try {
+            rs = db_controller.getResultSet(query);
+            if(null == rs)
+                return null;
+
+            while (rs.next()) {
+                List<String> tags = new ArrayList<String>();
+                for(String tag : rs.getString("c.tag").split(" ")) {
+                    tags.add(tag);
+                }
+                result.put(rs.getString("a.title"), tags);
+            }
+
+        } catch (SQLException e) {
+            return null;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+            } catch (SQLException e) {
+                System.err.println(e.toString());
+            }
+        }
+
+        return result;
+    }
 }

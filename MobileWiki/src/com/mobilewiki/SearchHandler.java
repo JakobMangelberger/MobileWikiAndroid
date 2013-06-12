@@ -1,5 +1,6 @@
 package com.mobilewiki;
 
+import android.util.Log;
 import com.mobilewiki.tables.IWikiArticle;
 import com.mobilewiki.tables.IWikiContent;
 import com.mobilewiki.tables.WikiArticle;
@@ -28,6 +29,9 @@ public class SearchHandler {
 
         Map<String, List<String>> allEntries = sqlHandler.get_all_titles_with_tags();
 
+        if(null == allEntries) {
+            return new ArrayList<String>();
+        }
         List<String> articles = new ArrayList<String>();
         for (String entryTitle : allEntries.keySet()) {
             List<String> tags = allEntries.get(entryTitle);

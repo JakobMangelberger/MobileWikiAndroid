@@ -40,6 +40,10 @@ public class MobileWikiServer extends ServerResource {
 						String title = webservice.getTitleForArticleId(article_id);
 						jsonobj_response.put("result", title);
 						break;
+
+                    case "getAllTitlesWithTags":
+                        jsonobj_response.put("result", webservice.getAllTitlesWithTags());
+                        break;
 	
 					default:
 						jsonobj_response.put("result", "Fehler");
