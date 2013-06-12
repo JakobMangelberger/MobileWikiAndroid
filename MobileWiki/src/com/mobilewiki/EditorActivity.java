@@ -96,7 +96,8 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 			startActivity(intent);
 			return super.onOptionsItemSelected(item);
 		case R.id.save_art:
-			Toast.makeText(this, "Article saved!", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "Article saved!", Toast.LENGTH_SHORT).show();
+			// RequestHandler.getInstance().save
 			finish();
 			return super.onOptionsItemSelected(item);
 		case R.id.cancel_edit:

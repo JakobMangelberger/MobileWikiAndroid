@@ -1,5 +1,6 @@
 package com.mobilewiki;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -187,7 +188,69 @@ public class RequestHandler {
         return result;
 	}
 	
-    @SuppressWarnings("unchecked")
+	public int createMain(String wiki_name, String logo_link) {
+		int result = -1;
+    	
+    	try {
+    		JSONObject jsonobject_request = new JSONObject();
+			jsonobject_request.put("function", "createMain");
+			jsonobject_request.put("wiki_name", wiki_name);
+			jsonobject_request.put("logo_link", logo_link);
+	    	
+			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
+			
+			if (jsonobject_response.get("result") != null) {
+				result = Integer.parseInt(jsonobject_response.get("result").toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        return result;
+	}
+	
+	public int createArticle(String title) {
+		int result = -1;
+    	
+    	try {
+    		JSONObject jsonobject_request = new JSONObject();
+			jsonobject_request.put("function", "createArticle");
+			jsonobject_request.put("title", title);
+	    	
+			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
+			
+			if (jsonobject_response.get("result") != null) {
+				result = Integer.parseInt(jsonobject_response.get("result").toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        return result;
+	}
+	
+	public int createContent(int article_id, String content, String tag) {
+		int result = -1;
+    	
+    	try {
+    		JSONObject jsonobject_request = new JSONObject();
+			jsonobject_request.put("function", "createArticle");
+			jsonobject_request.put("article_id", article_id);
+			jsonobject_request.put("content", content);
+			jsonobject_request.put("tag", tag);
+	    	
+			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
+			
+			if (jsonobject_response.get("result") != null) {
+				result = Integer.parseInt(jsonobject_response.get("result").toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        return result;
+	}
+	
     public Map<String, String> get_all_titles_with_tags() {
         Map<String, String> result = new HashMap<String, String>();
 
