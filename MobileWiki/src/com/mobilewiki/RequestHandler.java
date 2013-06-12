@@ -201,7 +201,7 @@ public class RequestHandler {
             if (jsonobject_response.get("result") != null) {
                 resultString = jsonobject_response.get("result").toString();
                 String[] resultArray = resultString.split("\n");
-                for(int i = 0; i < result.size(); i += 2) {
+                for(int i = 0; i < resultArray.length; i += 2) {
                     result.put(resultArray[i], resultArray[i + 1]);
                 }
             }
