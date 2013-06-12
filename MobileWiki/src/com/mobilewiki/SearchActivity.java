@@ -74,8 +74,6 @@ public class SearchActivity extends Activity {
         EditText searchPhraseBox = (EditText) findViewById(R.id.search_text);
         searchPhraseBox.setText(searchPhrase);
 
-        performSearch();
-
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
