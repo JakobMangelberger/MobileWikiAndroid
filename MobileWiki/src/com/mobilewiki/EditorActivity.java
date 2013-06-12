@@ -103,9 +103,9 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 			return super.onOptionsItemSelected(item);
 		case R.id.save_art:
 			//Toast.makeText(this, "Article saved!", Toast.LENGTH_SHORT).show();
-			String htmlString = Html.toHtml((Spanned) ed_view.getText());
-			
-			RequestHandler.getInstance().createContent(article_id, htmlString, tags);
+			Spanned htmlString = ed_view.getText();
+			String to_send = htmlString.toString();
+			RequestHandler.getInstance().createContent(article_id, to_send, tags);
 			finish();
 			return super.onOptionsItemSelected(item);
 		case R.id.cancel_edit:
