@@ -11,7 +11,7 @@ public class WebserviceAdapter {
 	public JSONObject callWebservice(JSONObject jsonobject_request)
 	{
 		JSONObject jsonobject_response = null;
-		ClientResource resource = new ClientResource("http://localhost:8080/WebserviceMobileWiki");  
+		ClientResource resource = new ClientResource("http://129.27.12.77:8080/WebserviceMobileWiki");  
 		 
 		try {
 			JsonRepresentation jsonrepresentation_request = new JsonRepresentation(jsonobject_request);
