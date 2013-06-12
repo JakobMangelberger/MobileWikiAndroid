@@ -5,11 +5,13 @@ import java.util.regex.Pattern;
 
 import android.graphics.Color;
 import android.text.Spannable;
+
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+
 import android.util.Log;
 import android.widget.EditText;
 
@@ -134,8 +136,10 @@ public class ContentHTMLParser implements IHTMLConstants {
 		int size = 100;
 		int[] index_start = new int[size];
 		int[] type_length = new int[size];
+
 		int i = 0;
 		int pos = 0;
+
 
 		for (int david = 0; david < IHTMLConstants.custom_tag_array.length; david++) {
 			while ((i = (string_text.indexOf(
@@ -199,6 +203,7 @@ public class ContentHTMLParser implements IHTMLConstants {
 
 		}
 		et.setText(spanned_text);
+
 		/*
 		 * 
 		 * 

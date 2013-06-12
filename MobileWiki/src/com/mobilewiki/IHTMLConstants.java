@@ -1,13 +1,12 @@
 package com.mobilewiki;
 
-import java.lang.reflect.Array;
 
 public interface IHTMLConstants {
 
 	static String HTML_START_TITLE_TAG = "<h2>";
 	static String HTML_END_TITLE_TAG = "</h2>";
 	static String CUSTOM_START_TITLE_TAG = "<subtitle-start>";
-	static String CUSTOM_END_TITLE_TAG = "<subtitle-end>";
+	static String CUSTOM_END_TITLE_TAG = "<subtitle-end>"; 
 
 	static String HTML_START_BOLD_TAG = "<b>";
 	static String HTML_END_BOLD_TAG = "</b>";
@@ -26,6 +25,7 @@ public interface IHTMLConstants {
 
 	static String HTML_BREAKLINE_TAG = "<br/>";
 	static String CUSTOM_BREAKLINE_TAG = "<break-newline-here>";
+
 
 	static String NEWLINE = "\n";
 	static String DOUBLE_NEWLINE = NEWLINE + NEWLINE;
