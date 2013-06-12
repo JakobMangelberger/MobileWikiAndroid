@@ -1,9 +1,13 @@
 package com.mobilewiki;
 
+import com.mobilewiki.tables.IWikiArticle;
+import com.mobilewiki.tables.IWikiContent;
+import com.mobilewiki.tables.WikiArticle;
+import com.mobilewiki.tables.WikiContent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 
 public class SearchHandler {
     private static SearchHandler _instance;
@@ -24,6 +28,9 @@ public class SearchHandler {
 
         Map<String, List<String>> allEntries = sqlHandler.get_all_titles_with_tags();
 
+        if(null == allEntries) {
+            return new ArrayList<String>();
+        }
         List<String> articles = new ArrayList<String>();
         for (String entryTitle : allEntries.keySet()) {
             List<String> tags = allEntries.get(entryTitle);
