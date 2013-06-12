@@ -1,13 +1,9 @@
 package com.mobilewiki;
 
-import com.mobilewiki.tables.IWikiArticle;
-import com.mobilewiki.tables.IWikiContent;
-import com.mobilewiki.tables.WikiArticle;
-import com.mobilewiki.tables.WikiContent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 public class SearchHandler {
     private static SearchHandler _instance;
