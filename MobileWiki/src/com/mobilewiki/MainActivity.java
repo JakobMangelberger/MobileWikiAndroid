@@ -1,5 +1,6 @@
 package com.mobilewiki;
 
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -25,6 +26,8 @@ public class MainActivity extends Activity {
 
 	private TextView article_text_view;
 	private int article_id;
+	private String tags;
+	
 	private ImageGetter imgGetter = new ImageGetter() {
 		public Drawable getDrawable(String source) {
 			Drawable drawable = getResources().getDrawable(
@@ -59,15 +62,18 @@ public class MainActivity extends Activity {
 			}
 		}
 		
+// 		HashMap<String, String> article_info = request_handler.getContentTitleTagForArticleId(article_id);
+// 		String total = IHTMLConstants.HTML_START_TITLE_TAG + article_info.get("title") + IHTMLConstants.HTML_END_TITLE_TAG + article_info.get("content");
+ 		
 		List<Integer> content_ids = request_handler.getContentIdsforArticleId(article_id);
 		title = request_handler.getTitleForArticleId(article_id);
 		String content = request_handler.getContentForContentId(content_ids.get(0));
+		tags = request_handler.getTagForContentId(content_ids.get(0));
 
 		title = IHTMLConstants.HTML_START_TITLE_TAG + title + IHTMLConstants.HTML_END_TITLE_TAG;
-	
-		String total = title + content;
-		
-		Log.e("Raw", total);
+ 		String total = title + content;
+ 		
+		//Log.e("Raw", total);
 		
 		article_text_view.setMovementMethod(new ScrollingMovementMethod());	
 		article_text_view.setText(Html.fromHtml(total));
@@ -125,9 +131,10 @@ public class MainActivity extends Activity {
 			Bundle parameters = new Bundle(2);
 			
 			String htmlString = Html.toHtml((Spanned) article_text_view.getText());
-			Log.e("Raw what is given to edit: ", htmlString);
+		//	Log.e("Raw what is given to edit: ", htmlString);
 			parameters.putString("content", htmlString);
 			parameters.putInt("article_id", article_id);
+			parameters.putString("tags", tags);
 			
 			intent.putExtras(parameters);
 			startActivity(intent);

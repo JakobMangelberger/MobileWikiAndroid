@@ -1,6 +1,7 @@
 package com.mobilewiki.webservice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -20,8 +21,8 @@ public class Client {
  
 		try {
 			JSONObject jsonobject_request = new JSONObject();
-			jsonobject_request.put("function", "getTitleForArticleId");
-			jsonobject_request.put("article_id", "2");
+			jsonobject_request.put("function", "getContentTitleTagForArticleId");
+			jsonobject_request.put("article_id", "1");
 			
 			JsonRepresentation jsonrepresentation_request = new JsonRepresentation(jsonobject_request);
 			
@@ -32,7 +33,7 @@ public class Client {
 				JSONObject jsonobject_response = jsonrepresentation_response.getJsonObject();
 				
 				String result = jsonobject_response.get("result").toString();
-				System.out.println(result);
+				System.out.println(jsonobject_response.get("title").toString());
 			}
 
 		} catch (Exception e) {

@@ -196,14 +196,13 @@ public class RequestHandler {
 			jsonobject_request.put("function", "getContentTitleTagForArticleId");
 			jsonobject_request.put("article_id", article_id);
 	    	
-			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
-			
+			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);		
 			if (jsonobject_response.get("result") != null) {
-				result.put("article_id", (String) jsonobject_response.get("article_id"));
-				result.put("content_id", (String) jsonobject_response.get("content_id"));
-				result.put("title", (String) jsonobject_response.get("title"));
-				result.put("content", (String) jsonobject_response.get("content"));
-				result.put("tag", (String) jsonobject_response.get("tag"));
+				result.put("article_id", jsonobject_response.get("article_id").toString());
+				result.put("content_id", jsonobject_response.get("content_id").toString());
+				result.put("title", jsonobject_response.get("title").toString());
+				result.put("content", jsonobject_response.get("content").toString());
+				result.put("tag", jsonobject_response.get("tag").toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -221,13 +220,12 @@ public class RequestHandler {
 			jsonobject_request.put("content_id", content_id);
 	    	
 			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
-			
 			if (jsonobject_response.get("result") != null) {
-				result.put("article_id", (String) jsonobject_response.get("article_id"));
-				result.put("content_id", (String) jsonobject_response.get("content_id"));
-				result.put("title", (String) jsonobject_response.get("title"));
-				result.put("content", (String) jsonobject_response.get("content"));
-				result.put("tag", (String) jsonobject_response.get("tag"));
+				result.put("article_id", jsonobject_response.get("article_id").toString());
+				result.put("content_id", jsonobject_response.get("content_id").toString());
+				result.put("title", jsonobject_response.get("title").toString());
+				result.put("content", jsonobject_response.get("content").toString());
+				result.put("tag", jsonobject_response.get("tag").toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -245,13 +243,12 @@ public class RequestHandler {
 			jsonobject_request.put("title", title);
 	    	
 			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
-			
 			if (jsonobject_response.get("result") != null) {
-				result.put("article_id", (String) jsonobject_response.get("article_id"));
-				result.put("content_id", (String) jsonobject_response.get("content_id"));
-				result.put("title", (String) jsonobject_response.get("title"));
-				result.put("content", (String) jsonobject_response.get("content"));
-				result.put("tag", (String) jsonobject_response.get("tag"));
+				result.put("article_id", jsonobject_response.get("article_id").toString());
+				result.put("content_id", jsonobject_response.get("content_id").toString());
+				result.put("title", jsonobject_response.get("title").toString());
+				result.put("content", jsonobject_response.get("content").toString());
+				result.put("tag", jsonobject_response.get("tag").toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -354,7 +351,6 @@ public class RequestHandler {
 			try {
 				list.add(Integer.parseInt(jsonArray.get(i).toString()));
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

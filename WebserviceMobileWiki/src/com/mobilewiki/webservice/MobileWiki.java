@@ -434,7 +434,7 @@ public class MobileWiki {
 		HashMap<String, String> result = new HashMap<String, String>();
 		
 		query = "SELECT a.article_id, c.content_id, a.title, c.content, c.tag " +
-				"FROM mobilewikia.wiki_article a" +
+				"FROM mobilewikia.wiki_article a " +
 				"LEFT JOIN mobilewikia.wiki_content c ON ( a.article_id = c.article_id ) " +
 				"WHERE a.article_id = '" + article_id + "'";
 		
@@ -474,7 +474,7 @@ public class MobileWiki {
 		HashMap<String, String> result = new HashMap<String, String>();
 		
 		query = "SELECT a.article_id, c.content_id, a.title, c.content, c.tag " +
-				"FROM mobilewikia.wiki_article a" +
+				"FROM mobilewikia.wiki_article a " +
 				"LEFT JOIN mobilewikia.wiki_content c ON ( a.article_id = c.article_id ) " +
 				"WHERE c.content_id = '" + content_id + "'";
 		
@@ -514,7 +514,7 @@ public class MobileWiki {
 		HashMap<String, String> result = new HashMap<String, String>();
 		
 		query = "SELECT a.article_id, c.content_id, a.title, c.content, c.tag " +
-				"FROM mobilewikia.wiki_article a" +
+				"FROM mobilewikia.wiki_article a " +
 				"LEFT JOIN mobilewikia.wiki_content c ON ( a.article_id = c.article_id ) " +
 				"WHERE c.title = '" + title + "'";
 		
