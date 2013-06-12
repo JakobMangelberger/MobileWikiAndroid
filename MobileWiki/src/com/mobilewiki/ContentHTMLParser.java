@@ -22,8 +22,8 @@ public class ContentHTMLParser implements IHTMLConstants {
 
 	public ContentHTMLParser() {
 
-		Log.e("length",
-				Integer.toString(IHTMLConstants.custom_tag_array.length));
+	//	Log.e("length",
+	//			Integer.toString(IHTMLConstants.custom_tag_array.length));
 
 		p_array = Pattern.compile(IHTMLConstants.custom_tag_array[1]);
 
@@ -131,7 +131,7 @@ public class ContentHTMLParser implements IHTMLConstants {
 		String string_text = et.getText().toString();
 
 		// find all occurrences forward
-		Log.e("Searchig", ":)");
+	//	Log.e("Searchig", ":)");
 
 		int size = 100;
 		int[] index_start = new int[size];

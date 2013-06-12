@@ -36,6 +36,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.activity_main); 
+		article_text_view = (TextView) findViewById(R.id.article_content);
 	}
 
 	@Override
@@ -47,13 +48,13 @@ public class MainActivity extends Activity {
 		Bundle bundle = getIntent().getExtras();
 		int article_id = 1;
 		
-		if (bundle != null) {
+ 		if (bundle != null) {
 			if (bundle.getString("article_id") != null) {
 				article_id = Integer.parseInt(bundle.getString("article_id").toString());
 			}
 		}
 		
-		TextView article_text_view = (TextView) findViewById(R.id.article_content);
+		
 		article_text_view.setMovementMethod(new ScrollingMovementMethod());		
 
 		RequestHandler request_handler = RequestHandler.getInstance();	

@@ -33,7 +33,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		content_of_the_article = null;
 		if (null != parameters) {
 			content_of_the_article = parameters.getString("content");
-			Log.e("content", content_of_the_article);
+		//	Log.e("content", content_of_the_article);
 			if (content_of_the_article == null)
 				content_of_the_article = "";
 		}
