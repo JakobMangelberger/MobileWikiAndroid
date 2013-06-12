@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+	private TextView article_text_view;
 	private ImageGetter imgGetter = new ImageGetter() {
 		public Drawable getDrawable(String source) {
 			Drawable drawable = getResources().getDrawable(
@@ -44,7 +45,7 @@ public class MainActivity extends Activity {
 		if (b != null)
 			value = b.getString("title");
 
-		TextView article_text_view = (TextView) findViewById(R.id.article_content);
+		article_text_view = (TextView) findViewById(R.id.article_content);
 		article_text_view.setMovementMethod(new ScrollingMovementMethod());
 		if (value != null)
 			title = "<h2>" + value + "</h2>";
@@ -109,7 +110,7 @@ public class MainActivity extends Activity {
 		case R.id.edit_article:
 			intent = new Intent(MainActivity.this, EditorActivity.class);
 			Bundle parameters = new Bundle(1);
-			parameters.putString("ARTICLE_ID", "1");
+			parameters.putString("content", article_text_view.getText().toString());
 			intent.putExtras(parameters);
 			startActivity(intent);
 			return true;
