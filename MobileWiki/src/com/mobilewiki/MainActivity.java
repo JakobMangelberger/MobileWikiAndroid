@@ -62,17 +62,16 @@ public class MainActivity extends Activity {
 			}
 		}
 		
-// 		HashMap<String, String> article_info = request_handler.getContentTitleTagForArticleId(article_id);
-// 		String total = IHTMLConstants.HTML_START_TITLE_TAG + article_info.get("title") + IHTMLConstants.HTML_END_TITLE_TAG + article_info.get("content");
- 		
 		List<Integer> content_ids = request_handler.getContentIdsforArticleId(article_id);
 		title = request_handler.getTitleForArticleId(article_id);
 		String content = request_handler.getContentForContentId(content_ids.get(0));
 		tags = request_handler.getTagForContentId(content_ids.get(0));
 
 		title = IHTMLConstants.HTML_START_TITLE_TAG + title + IHTMLConstants.HTML_END_TITLE_TAG;
- 		String total = title + content;
- 		
+	
+		String total = title + content;
+		
+
 		//Log.e("Raw", total);
 		
 		article_text_view.setMovementMethod(new ScrollingMovementMethod());	
