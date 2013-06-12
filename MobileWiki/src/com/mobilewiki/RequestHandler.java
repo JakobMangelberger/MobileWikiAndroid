@@ -195,20 +195,18 @@ public class RequestHandler {
     public Map<String, List<String>> get_all_titles_with_tags() {
         Map<String, List<String>> result = new HashMap<String, List<String>>();
 
-        boolean odd = true;
+        try {
+            JSONObject jsonobject_request = new JSONObject();
+            jsonobject_request.put("function", "getAllTitlesWithTags");
 
-        // TODO: Richtiges SQL zusammenbauen
-//        for (String title : get) {
-//            List<String> tagList = new ArrayList<String>();
-//            if (odd) {
-//                tagList.add("tag1");
-//                odd = false;
-//            } else {
-//                tagList.add("tag2");
-//                odd = true;
-//            }
-//            result.put(title, tagList);
-//        }
+            JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
+
+            if (jsonobject_response.get("result") != null) {
+                result = (Map<String, List<String>>) jsonobject_response.get("result");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return result;
     }
