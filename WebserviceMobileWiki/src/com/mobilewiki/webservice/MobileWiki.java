@@ -433,8 +433,8 @@ public class MobileWiki {
 		return delete_state;
 	}
 
-    public Map<String, String> getAllTitlesWithTags() {
-        Map<String, String> result = new HashMap<String, String>();
+    public List<String> getAllTitlesWithTags() {
+        List<String> result = new ArrayList<>();
 
         query = "SELECT a.article_id, a.title, c.tag, c.date_change FROM mobilewikia.wiki_article a, mobilewikia.wiki_content c WHERE c.article_id = a.article_id";
 
@@ -444,7 +444,8 @@ public class MobileWiki {
                 return null;
 
             while (rs.next()) {
-                result.put(rs.getString("a.title"), rs.getString("c.tag"));
+                result.add(rs.getString("a.title"));
+                result.add(rs.getString("c.tag"));
             }
 
         } catch (SQLException e) {
