@@ -165,6 +165,10 @@ public class MobileWikiServer extends ServerResource {
 					result_delete = webservice.deleteContent(content_id);
 					jsonobj_response.put("result", result_delete);
 					break;
+
+                case "getAllTitlesWithTags":
+                    jsonobj_response.put("result", webservice.getAllTitlesWithTags());
+                    break;
 					
 				default:
 					jsonobj_response.put("result", "Fehler");
