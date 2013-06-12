@@ -187,8 +187,10 @@ public class RequestHandler {
 	}
 	
     @SuppressWarnings("unchecked")
-	public Map<String, List<String>> get_all_titles_with_tags() {
-        Map<String, List<String>> result = new HashMap<String, List<String>>();
+    public Map<String, String> get_all_titles_with_tags() {
+        Map<String, String> result = new HashMap<>();
+
+        String resultString;
 
         try {
             JSONObject jsonobject_request = new JSONObject();
@@ -197,7 +199,11 @@ public class RequestHandler {
             JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
 
             if (jsonobject_response.get("result") != null) {
-                result = (Map<String, List<String>>) jsonobject_response.get("result");
+                resultString = jsonobject_response.get("result").toString();
+                String[] resultArray = resultString.split("\n");
+                for(int i = 0; i < result.size(); i += 2) {
+                    result.put(resultArray[i], resultArray[i + 1]);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
