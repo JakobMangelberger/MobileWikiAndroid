@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.mobilewiki.db.DatabaseController;
 
@@ -15,9 +14,7 @@ public class MobileWiki {
 	private ResultSet rs = null;
 
 	public MobileWiki() {
-		if (db_controller == null) {
-			db_controller = new DatabaseController();
-		}
+		db_controller = DatabaseController.getInstance();
 	}
 	
 	public String respondMessage(String message) {
@@ -433,6 +430,126 @@ public class MobileWiki {
 		return delete_state;
 	}
 
+	public HashMap<String, String> getContentTitleTagForArticleId(int article_id) {
+		HashMap<String, String> result = new HashMap<String, String>();
+		
+		query = "SELECT a.article_id, c.content_id, a.title, c.content, c.tag " +
+				"FROM mobilewikia.wiki_article a" +
+				"LEFT JOIN mobilewikia.wiki_content c ON ( a.article_id = c.article_id ) " +
+				"WHERE a.article_id = '" + article_id + "'";
+		
+		try {
+			rs = db_controller.getResultSet(query);
+
+			if (rs != null && rs.next()) {
+				result.put("article_id", rs.getString("article_id"));
+				result.put("content_id", rs.getString("content_id"));
+				result.put("title", rs.getString("title"));
+				result.put("content", rs.getString("content"));
+				result.put("tag", rs.getString("tag"));
+			}
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Query: " + query);
+
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+			} catch (SQLException e) {
+				System.err.println(e.toString());
+				System.out
+						.println("Error closing ResultSet: getContentTitleTagForArticleId("
+								+ article_id + ")");
+			}
+		}
+		
+		return result;
+	}
+
+	public HashMap<String, String> getContentTitleTagForContentId(int content_id) {
+		HashMap<String, String> result = new HashMap<String, String>();
+		
+		query = "SELECT a.article_id, c.content_id, a.title, c.content, c.tag " +
+				"FROM mobilewikia.wiki_article a" +
+				"LEFT JOIN mobilewikia.wiki_content c ON ( a.article_id = c.article_id ) " +
+				"WHERE c.content_id = '" + content_id + "'";
+		
+		try {
+			rs = db_controller.getResultSet(query);
+
+			if (rs != null && rs.next()) {
+				result.put("article_id", rs.getString("article_id"));
+				result.put("content_id", rs.getString("content_id"));
+				result.put("title", rs.getString("title"));
+				result.put("content", rs.getString("content"));
+				result.put("tag", rs.getString("tag"));
+			}
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Query: " + query);
+
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+			} catch (SQLException e) {
+				System.err.println(e.toString());
+				System.out
+						.println("Error closing ResultSet: getContentTitleTagForContentId("
+								+ content_id + ")");
+			}
+		}
+		
+		return result;
+	}
+	
+	public HashMap<String, String> getContentTitleTagForTitle(String title) {
+		HashMap<String, String> result = new HashMap<String, String>();
+		
+		query = "SELECT a.article_id, c.content_id, a.title, c.content, c.tag " +
+				"FROM mobilewikia.wiki_article a" +
+				"LEFT JOIN mobilewikia.wiki_content c ON ( a.article_id = c.article_id ) " +
+				"WHERE c.title = '" + title + "'";
+		
+		try {
+			rs = db_controller.getResultSet(query);
+
+			if (rs != null && rs.next()) {
+				result.put("article_id", rs.getString("article_id"));
+				result.put("content_id", rs.getString("content_id"));
+				result.put("title", rs.getString("title"));
+				result.put("content", rs.getString("content"));
+				result.put("tag", rs.getString("tag"));
+			}
+
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Query: " + query);
+
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+			} catch (SQLException e) {
+				System.err.println(e.toString());
+				System.out
+						.println("Error closing ResultSet: getContentTitleTagForTitle("
+								+ title + ")");
+			}
+		}
+		
+		return result;
+	}
+	
     public String getAllTitlesWithTags() {
         List<String> result = new ArrayList<>();
 

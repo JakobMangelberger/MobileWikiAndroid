@@ -8,6 +8,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -15,9 +16,6 @@ import android.widget.Toast;
 
 public class EditorActivity extends Activity implements IHTMLConstants {
 
-	private int article_id;
-	private String title = "<h2>Some article</h2>";
-	private String str = "<p>Das ist ein <b>Test</b></p> ";
 	private EditText ed_view;
 	private static int CASE_BOLD = 1;
 	private static int CASE_PARAGRAPH = 2;
@@ -25,19 +23,24 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 	private static int CASE_NEWLINE = 4;
 	private static int CASE_TITLE = 5;
 
+	private String content_of_the_article;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.editor_layout); // TODO layout
+		Bundle parameters = getIntent().getExtras();
+		content_of_the_article = null;
+		if (null != parameters) {
+			content_of_the_article = parameters.getString("content");
+			Log.e("content", content_of_the_article);
+			if (content_of_the_article == null)
+				content_of_the_article = "";
+		}
 		ed_view = (EditText) findViewById(R.id.edit_text);
-
-		String cnt = ContentHTMLParser.getInstance().parseFromHtmlToCustom(
-				title + str + "<p>Das ist ein <b>Borat!!</b></p>"
-						+ "<img src=\"borat.jpeg\"/>" + title + str + str);
-
-		// Call syntax highlighter
-		ed_view.setText(cnt);
+		ed_view.setText(content_of_the_article);
 		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
+		// Call syntax highlighter
 
 		// ed_view.setText(cnt);
 
@@ -46,16 +49,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 	@Override
 	public void onStart() {
 		super.onStart();
-		Bundle parameters = getIntent().getExtras();
-		String editorID = null;
-		if (null != parameters) {
-			editorID = parameters.getString("ARTICLE_ID");
-			if (editorID == null)
-				editorID = "";
 
-		} else {
-			article_id = Integer.parseInt(editorID);
-		}
 	}
 
 	@Override
@@ -90,7 +84,6 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 			String raw = ed_view.getText().toString();
 
 			raw = ContentHTMLParser.getInstance().parseFromCustomToHtml(raw);
-			parameters.putString("PREVIEW_TEXT", raw);
 			parameters.putString("PREVIEW_TEXT", raw);
 
 			intent.putExtras(parameters);
@@ -157,20 +150,23 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
 		savedInstanceState.putString("Content", ed_view.getText().toString());
-		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
+		// ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
 
 	}
 
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		// This overloads the syntax highlight ing
-		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
+		Log.e("I am ", "in rstore instance");
 		ed_view.setText(savedInstanceState.getString("Content"));
+		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
+
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
+
 		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
 	}
 

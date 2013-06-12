@@ -86,7 +86,6 @@ public class RequestHandler {
         return result;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Integer> getContentIdsforArticleId(int article_id) {
     	List<Integer> result = new ArrayList<Integer>();
     	
@@ -187,7 +186,6 @@ public class RequestHandler {
         return result;
 	}
 	
-    @SuppressWarnings("unchecked")
     public Map<String, String> get_all_titles_with_tags() {
         Map<String, String> result = new HashMap<String, String>();
 
@@ -219,7 +217,6 @@ public class RequestHandler {
 			try {
 				list.add(Integer.parseInt(jsonArray.get(i).toString()));
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

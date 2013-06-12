@@ -22,7 +22,6 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	private TextView article_text_view;
-	
 	private ImageGetter imgGetter = new ImageGetter() {
 		public Drawable getDrawable(String source) {
 			Drawable drawable = getResources().getDrawable(

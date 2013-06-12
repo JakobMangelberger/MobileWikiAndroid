@@ -1,8 +1,7 @@
 package com.mobilewiki.rest;
 
-import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
-
 import org.json.JSONObject;
 import org.restlet.data.MediaType;
 import org.restlet.ext.json.JsonRepresentation;
@@ -39,6 +38,7 @@ public class MobileWikiServer extends ServerResource {
 				int article_id, content_id, main_id, result_insert, result_delete, result_update;
 				String content, date_change, logo_link, title, tag, wiki_name = "";
 				List<Integer> ids;
+				HashMap<String, String> hash_map;
 
 				switch (function_name) {
 				case "getArticleIds":
@@ -166,6 +166,27 @@ public class MobileWikiServer extends ServerResource {
 					jsonobj_response.put("result", result_delete);
 					break;
 
+				case "getContentTitleTagForArticleId":
+					article_id = Integer.parseInt(jsonobject_request.get("article_id").toString());
+					
+					hash_map = webservice.getContentTitleTagForArticleId(article_id);
+					jsonobj_response.put("result", hash_map);
+                    break;
+
+				case "getContentTitleTagForContentId":
+					content_id = Integer.parseInt(jsonobject_request.get("content_id").toString());
+					
+					hash_map = webservice.getContentTitleTagForContentId(content_id);
+					jsonobj_response.put("result", hash_map);
+                    break;
+                    
+				case "getContentTitleTagForTitle":
+					title = jsonobject_request.get("title").toString();
+					
+					hash_map = webservice.getContentTitleTagForTitle(title);
+					jsonobj_response.put("result", hash_map);
+                    break;
+					
                 case "getAllTitlesWithTags":
                     jsonobj_response.put("result", webservice.getAllTitlesWithTags());
                     break;
@@ -178,7 +199,6 @@ public class MobileWikiServer extends ServerResource {
 				jsonobj_response.put("result", "Request Object is not Type of MediaType.APPLICATION_JSON");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		JsonRepresentation test = new JsonRepresentation(jsonobj_response);
