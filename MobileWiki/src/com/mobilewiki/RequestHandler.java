@@ -202,7 +202,7 @@ public class RequestHandler {
             JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
 
             if (jsonobject_response.get("result") != null) {
-                result = (Map<String, List<String>>) jsonobject_response.get("result");
+                result = (Map<String, String>) jsonobject_response.get("result");
             }
         } catch (Exception e) {
             e.printStackTrace();
