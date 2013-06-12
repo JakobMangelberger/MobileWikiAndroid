@@ -35,21 +35,6 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 				title + str + "<p>Das ist ein <b>Borat!!</b></p>"
 						+ "<img src=\"borat.jpeg\"/>" + title + str + str);
 
-		final SpannableStringBuilder sb = new SpannableStringBuilder(
-				"your text here");
-		final ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(255,
-				100, 50));
-		final StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
-
-		// Span to make text bold
-		sb.setSpan(fcs, 0, 4, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-
-		// Set the text color for first 4 characters
-		sb.setSpan(bss, 0, 4, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-
-		// make them also bold
-		// ed_view.setText(cnt);
-
 		// Call syntax highlighter
 		ed_view.setText(cnt);
 		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
@@ -106,6 +91,8 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 
 			raw = ContentHTMLParser.getInstance().parseFromCustomToHtml(raw);
 			parameters.putString("PREVIEW_TEXT", raw);
+			parameters.putString("PREVIEW_TEXT", raw);
+
 			intent.putExtras(parameters);
 			Toast.makeText(this, "This is just a preview!", Toast.LENGTH_LONG)
 					.show();
@@ -132,6 +119,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 
 		String new_string = null;
 		int temp_pos = 0;
+
 		if (switch_num == CASE_BOLD) {
 			new_string = first_part + CUSTOM_START_BOLD_TAG
 					+ CUSTOM_END_BOLD_TAG + end_part;
@@ -156,8 +144,6 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		ed_view.setText(new_string);
 		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
 
-		
-		
 		final int new_pos = temp_pos;
 		ed_view.post(new Runnable() {
 			@Override
@@ -170,9 +156,9 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
+		savedInstanceState.putString("Content", ed_view.getText().toString());
+		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
 
-		  savedInstanceState.putString("Content", ed_view.getText().toString());
-		  ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
 	}
 
 	@Override
@@ -187,4 +173,5 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		super.onResume();
 		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
 	}
+
 }

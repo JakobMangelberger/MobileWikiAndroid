@@ -5,8 +5,13 @@ import java.util.regex.Pattern;
 
 import android.graphics.Color;
 import android.text.Spannable;
+
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
+
 import android.util.Log;
 import android.widget.EditText;
 
@@ -131,31 +136,74 @@ public class ContentHTMLParser implements IHTMLConstants {
 		int size = 100;
 		int[] index_start = new int[size];
 		int[] type_length = new int[size];
-		int CUSTOM_START_TITLE_TAG_int = 1;
+
 		int i = 0;
 		int pos = 0;
-		
-		for(int david = 0; david < IHTMLConstants.custom_tag_array.length; david++)
-		{
-			while ((i = (string_text.indexOf(IHTMLConstants.custom_tag_array[david], i) + 1)) > 0
+
+
+		for (int david = 0; david < IHTMLConstants.custom_tag_array.length; david++) {
+			while ((i = (string_text.indexOf(
+					IHTMLConstants.custom_tag_array[david], i) + 1)) > 0
 					&& pos < 100) {
 				pos++;
 				Log.e("found at", Integer.toString(i));
 				Log.e("I: ", Integer.toString(i));
-				index_start[pos] = i-1;
-				type_length[pos] = IHTMLConstants.custom_tag_array[david].length();
+				index_start[pos] = i - 1;
+				type_length[pos] = IHTMLConstants.custom_tag_array[david]
+						.length();
 			}
 		}
 		//
 		for (int bla = 0; bla < size - 1; bla++) {
-			if (index_start[bla] != 0) {
+			if (type_length[bla] == CUSTOM_BREAKLINE_TAG.length()) {
+				((Spannable) spanned_text).setSpan(new ForegroundColorSpan(
+						Color.CYAN), index_start[bla], index_start[bla]
+						+ type_length[bla], Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				((Spannable) spanned_text).setSpan(new StyleSpan(
+						android.graphics.Typeface.BOLD), index_start[bla],
+						index_start[bla] + type_length[bla],
+						Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			} else if (type_length[bla] == CUSTOM_START_BOLD_TAG.length()
+					|| type_length[bla] == CUSTOM_END_BOLD_TAG.length()) {
+				((Spannable) spanned_text).setSpan(new ForegroundColorSpan(
+						Color.GREEN), index_start[bla], index_start[bla]
+						+ type_length[bla], Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				((Spannable) spanned_text).setSpan(new StyleSpan(
+						android.graphics.Typeface.BOLD), index_start[bla],
+						index_start[bla] + type_length[bla],
+						Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			} else if (type_length[bla] == CUSTOM_START_PARA_TAG.length()
+					|| type_length[bla] == CUSTOM_END_PARA_TAG.length()) {
+				((Spannable) spanned_text).setSpan(new ForegroundColorSpan(
+						Color.MAGENTA), index_start[bla], index_start[bla]
+						+ type_length[bla], Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				((Spannable) spanned_text).setSpan(new StyleSpan(
+						android.graphics.Typeface.BOLD), index_start[bla],
+						index_start[bla] + type_length[bla],
+						Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			} else if (type_length[bla] == CUSTOM_START_IMAGE_TAG.length()
+					|| type_length[bla] == CUSTOM_END_IMAGE_TAG.length()) {
 				((Spannable) spanned_text).setSpan(new ForegroundColorSpan(
 						Color.BLUE), index_start[bla], index_start[bla]
 						+ type_length[bla], Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				((Spannable) spanned_text).setSpan(new StyleSpan(
+						android.graphics.Typeface.BOLD), index_start[bla],
+						index_start[bla] + type_length[bla],
+						Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			} else if (type_length[bla] == CUSTOM_START_TITLE_TAG.length()
+					|| type_length[bla] == CUSTOM_END_TITLE_TAG.length()) {
+				((Spannable) spanned_text).setSpan(new ForegroundColorSpan(
+						Color.RED), index_start[bla], index_start[bla]
+						+ type_length[bla], Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				((Spannable) spanned_text).setSpan(new StyleSpan(
+						android.graphics.Typeface.BOLD), index_start[bla],
+						index_start[bla] + type_length[bla],
+						Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 
 		}
-		et.setText(spanned_text); 
+		et.setText(spanned_text);
+
 		/*
 		 * 
 		 * 
