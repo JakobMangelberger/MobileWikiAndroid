@@ -12,5 +12,10 @@
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="@string/About"/>
+        <item
+        android:id="@+id/exit_app"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="Exit"/>
 
 </menu>
