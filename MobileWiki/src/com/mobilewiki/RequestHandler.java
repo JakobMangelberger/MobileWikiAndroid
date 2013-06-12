@@ -188,7 +188,7 @@ public class RequestHandler {
 	
     @SuppressWarnings("unchecked")
     public Map<String, String> get_all_titles_with_tags() {
-        Map<String, String> result = new HashMap<>();
+        Map<String, String> result = new HashMap<String, String>();
 
         String resultString;
 
