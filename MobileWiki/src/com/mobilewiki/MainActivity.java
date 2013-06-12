@@ -24,6 +24,7 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	private TextView article_text_view;
+	private int article_id;
 	private ImageGetter imgGetter = new ImageGetter() {
 		public Drawable getDrawable(String source) {
 			Drawable drawable = getResources().getDrawable(
@@ -48,7 +49,7 @@ public class MainActivity extends Activity {
 
 		RequestHandler request_handler = RequestHandler.getInstance();	
 		Bundle bundle = getIntent().getExtras();
-		int article_id = 1;
+		article_id = 1;
 		String title = "";
 		
  		if (bundle != null) {
@@ -121,11 +122,12 @@ public class MainActivity extends Activity {
 		switch (item.getItemId()) {
 		case R.id.edit_article:
 			intent = new Intent(MainActivity.this, EditorActivity.class);
-			Bundle parameters = new Bundle(1);
+			Bundle parameters = new Bundle(2);
 			
 			String htmlString = Html.toHtml((Spanned) article_text_view.getText());
 			Log.e("Raw what is given to edit: ", htmlString);
 			parameters.putString("content", htmlString);
+			parameters.putInt("article_id", article_id);
 			
 			intent.putExtras(parameters);
 			startActivity(intent);
