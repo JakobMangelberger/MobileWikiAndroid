@@ -1,45 +1,31 @@
 package com.mobilewiki;
 
-import com.mobilewiki.tables.IWikiArticle;
-
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 public class SQLHandler {
     private static SQLHandler _instance;
-    public static SQLHandler getInstance() {
-        if(null == _instance) {
-            _instance = new SQLHandler();
-        }
-        return _instance;
-    }
-
     private static int time_offset = 0;
-
-
     String[] titles = new String[]{"Android", "iPhone", "WindowsMobile",
             "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
             "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
             "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
             "Android", "iPhone", "WindowsMobile"};
 
+
     private SQLHandler() {
         _instance = this;
     }
 
-    public int[] get_ids() {
-        int[] result = new int[titles.length];
-
-        for(int i = 0; i < result.length; i++) {
-            result[i] = i;
+    public static SQLHandler getInstance() {
+        if (null == _instance) {
+            _instance = new SQLHandler();
         }
-        return result;
+        return _instance;
     }
 
     public String get_title(int id) {
-        if(id >= titles.length)
+        if (id >= titles.length)
             return null;
 
         return titles[id];
@@ -74,10 +60,30 @@ public class SQLHandler {
     }
 
     public int get_id_for_article_title(String title) {
-        for(int i = 0; i < titles.length; i++) {
-            if(titles[i] == title)
+        for (int i = 0; i < titles.length; i++) {
+            if (titles[i] == title)
                 return i;
         }
-        return  -1;
+        return -1;
+    }
+
+    public Map<String, List<String>> get_all_titles_with_tags() {
+        Map<String, List<String>> result = new HashMap<String, List<String>>();
+
+        boolean odd = true;
+
+        for (String title : titles) {
+            List<String> tagList = new ArrayList<String>();
+            if (odd) {
+                tagList.add("tag1");
+                odd = false;
+            } else {
+                tagList.add("tag2");
+                odd = true;
+            }
+            result.put(title, tagList);
+        }
+
+        return result;
     }
 }

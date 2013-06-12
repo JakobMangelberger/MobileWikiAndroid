@@ -184,11 +184,11 @@ public class SearchActivity extends Activity {
         }
 
         EditText searchPhraseBox = (EditText) findViewById(R.id.search_text);
-        List<IWikiArticle> articles = searchHandler.search_articles(searchPhraseBox.getText().toString(), matchAllKeywords);
+        List<String> articles = searchHandler.search_articles(searchPhraseBox.getText().toString(), matchAllKeywords);
         list.clear();
 
-        for (IWikiArticle article : articles) {
-            list.add(article.getTitle());
+        for (String article : articles) {
+            list.add(article);
         }
         if (list.size() == 0) {
             listView.setAdapter(noEntriesAdapter);
