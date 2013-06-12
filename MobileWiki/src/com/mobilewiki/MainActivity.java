@@ -116,6 +116,10 @@ public class MainActivity extends Activity {
 		case R.id.about:
             intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
+            return true;
+		case R.id.exit_app:
+            super.finish();
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
