@@ -1,14 +1,10 @@
 package com.mobilewiki;
 
-import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mobilewiki.controls.WebserviceAdapter;
@@ -24,8 +20,6 @@ public class RequestHandler {
         }
         return _instance;
     }
-
-    private static int time_offset = 0;
 
     private RequestHandler() {
         _instance = this;
@@ -192,7 +186,8 @@ public class RequestHandler {
         return result;
 	}
 	
-    public Map<String, List<String>> get_all_titles_with_tags() {
+    @SuppressWarnings("unchecked")
+	public Map<String, List<String>> get_all_titles_with_tags() {
         Map<String, List<String>> result = new HashMap<String, List<String>>();
 
         try {

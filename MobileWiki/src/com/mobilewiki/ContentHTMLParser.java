@@ -5,9 +5,7 @@ import java.util.regex.Pattern;
 
 import android.graphics.Color;
 import android.text.Spannable;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.widget.EditText;

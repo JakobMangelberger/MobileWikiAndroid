@@ -1,6 +1,5 @@
 package com.mobilewiki;
 
-import java.lang.reflect.Array;
 
 public interface IHTMLConstants {
 

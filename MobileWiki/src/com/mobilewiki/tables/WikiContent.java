@@ -3,7 +3,6 @@ package com.mobilewiki.tables;
 import com.mobilewiki.RequestHandler;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
