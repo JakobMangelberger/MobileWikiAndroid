@@ -25,6 +25,8 @@ public class MainActivity extends Activity {
 
 	private TextView article_text_view;
 	private int article_id;
+	private String tags;
+	
 	private ImageGetter imgGetter = new ImageGetter() {
 		public Drawable getDrawable(String source) {
 			Drawable drawable = getResources().getDrawable(
@@ -62,6 +64,7 @@ public class MainActivity extends Activity {
 		List<Integer> content_ids = request_handler.getContentIdsforArticleId(article_id);
 		title = request_handler.getTitleForArticleId(article_id);
 		String content = request_handler.getContentForContentId(content_ids.get(0));
+		tags = request_handler.getTagForContentId(content_ids.get(0));
 
 		title = IHTMLConstants.HTML_START_TITLE_TAG + title + IHTMLConstants.HTML_END_TITLE_TAG;
 	
@@ -128,6 +131,7 @@ public class MainActivity extends Activity {
 			Log.e("Raw what is given to edit: ", htmlString);
 			parameters.putString("content", htmlString);
 			parameters.putInt("article_id", article_id);
+			parameters.putString("tags", tags);
 			
 			intent.putExtras(parameters);
 			startActivity(intent);
