@@ -62,6 +62,8 @@ public class MainActivity extends Activity {
 		title = request_handler.getTitleForArticleId(article_id);
 		String content = request_handler.getContentForContentId(content_ids.get(0));
 
+		title = IHTMLConstants.HTML_START_TITLE_TAG + title + IHTMLConstants.HTML_END_TITLE_TAG;
+	
 		String total = title + content;
 		
 		Log.e("Raw", total);

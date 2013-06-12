@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
@@ -97,7 +99,8 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 			return super.onOptionsItemSelected(item);
 		case R.id.save_art:
 			//Toast.makeText(this, "Article saved!", Toast.LENGTH_SHORT).show();
-			// RequestHandler.getInstance().save
+			String htmlString = Html.toHtml((Spanned) ed_view.getText());
+			RequestHandler.getInstance().createContent(1, htmlString, "tag");
 			finish();
 			return super.onOptionsItemSelected(item);
 		case R.id.cancel_edit:
