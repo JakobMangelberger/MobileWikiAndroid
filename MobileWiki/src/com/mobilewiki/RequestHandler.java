@@ -1,12 +1,9 @@
 package com.mobilewiki;
 
-import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import org.json.JSONException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mobilewiki.controls.WebserviceAdapter;
@@ -14,7 +11,7 @@ import com.mobilewiki.controls.WebserviceAdapter;
 public class RequestHandler {
 	
     private static RequestHandler _instance;
-    private static WebserviceAdapter webserivce_adapter = new WebserviceAdapter();
+    private WebserviceAdapter webserivce_adapter;
     
     public static RequestHandler getInstance() {
         if(null == _instance) {
@@ -27,9 +24,10 @@ public class RequestHandler {
 
     private RequestHandler() {
         _instance = this;
+        this.webserivce_adapter  = new WebserviceAdapter();
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
 	public List<Integer> getArticleIds() {
     	List<Integer> result = new ArrayList<Integer>();
     	
@@ -40,7 +38,8 @@ public class RequestHandler {
 			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
 			
 			if (jsonobject_response.get("result") != null) {
-				result = (List<Integer>) jsonobject_response.get("result");
+				//result = (List<Integer>) jsonobject_response.get("result");
+				result = convertJsonArrayToArrayList((JSONArray)jsonobject_response.get("result"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,7 +88,7 @@ public class RequestHandler {
         return result;
 	}
 	
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public List<Integer> getContentIdsforArticleId(int article_id) {
     	List<Integer> result = new ArrayList<Integer>();
     	
@@ -101,7 +100,8 @@ public class RequestHandler {
 			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
 			
 			if (jsonobject_response.get("result") != null) {
-				result = (List<Integer>) jsonobject_response.get("result");
+				//result = (List<Integer>) jsonobject_response.get("result");
+				result = convertJsonArrayToArrayList((JSONArray)jsonobject_response.get("result"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -188,5 +188,20 @@ public class RequestHandler {
 		}
     	
         return result;
+	}
+	
+	private ArrayList<Integer> convertJsonArrayToArrayList(JSONArray jsonArray)
+	{
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for(int i=0; i < jsonArray.length(); i++)
+		{
+			try {
+				list.add(Integer.parseInt(jsonArray.get(i).toString()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 }

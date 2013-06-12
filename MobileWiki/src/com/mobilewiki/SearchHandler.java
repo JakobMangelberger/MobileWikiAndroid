@@ -28,7 +28,7 @@ public class SearchHandler {
 
         List<IWikiArticle> articles = new ArrayList<IWikiArticle>();
         for (int i = 0; i < ids.size(); i++) {
-            IWikiArticle tempArticle = new WikiArticle(i);
+            IWikiArticle tempArticle = new WikiArticle(ids.get(i));
             IWikiContent tempContent = new WikiContent(tempArticle.getLastContentId());
             if (!allKeywords) {
                 for (String keyword : keywords) {

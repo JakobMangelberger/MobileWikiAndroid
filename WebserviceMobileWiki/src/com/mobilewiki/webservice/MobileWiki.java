@@ -266,7 +266,7 @@ public class MobileWiki {
 			rs = db_controller.getResultSet(query);
 
 			if (rs != null && rs.next()) {
-				tag = rs.getString("content");
+				tag = rs.getString("tag");
 
 			}
 
