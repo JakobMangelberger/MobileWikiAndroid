@@ -14,8 +14,17 @@ public class DatabaseController implements IDatabaseController {
 	private String db_url = "jdbc:mysql://mobilewikia.unitedgosus.com";
 	private Connection connection;
 	private Statement statement;
+	
+	private static DatabaseController _instance;
 
-	public DatabaseController() {
+	public static DatabaseController getInstance() {
+        if(null == _instance) {
+        	_instance = new DatabaseController();
+        }
+        return _instance;
+    }
+	
+	private DatabaseController() {
 		this.connectDB();
 	}
 
