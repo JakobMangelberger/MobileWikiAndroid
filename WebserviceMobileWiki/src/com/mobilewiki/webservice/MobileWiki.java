@@ -125,7 +125,7 @@ public class MobileWiki {
 		List<Integer> content_ids = new ArrayList<Integer>();
 		
 		query = "Select Content_Id From mobilewikia.wiki_content Where Article_id = '"
-				+ article_id + "'";
+				+ article_id + "' order by date_change desc limit 1";
 		try {
 			rs = db_controller.getResultSet(query);
 
