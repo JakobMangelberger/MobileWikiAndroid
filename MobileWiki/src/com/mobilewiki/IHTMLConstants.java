@@ -1,6 +1,5 @@
 package com.mobilewiki;
 
-import java.lang.reflect.Array;
 
 public interface IHTMLConstants {
 
@@ -26,6 +25,7 @@ public interface IHTMLConstants {
 
 	static String HTML_BREAKLINE_TAG = "<br/>";
 	static String CUSTOM_BREAKLINE_TAG = "<break-newline-here>";
+
 
 	static String NEWLINE = "\n";
 	static String DOUBLE_NEWLINE = NEWLINE + NEWLINE;

@@ -7,6 +7,7 @@ import com.mobilewiki.tables.WikiContent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SearchHandler {
     private static SearchHandler _instance;
@@ -21,26 +22,30 @@ public class SearchHandler {
         return _instance;
     }
 
-    public List<IWikiArticle> search_articles(String phrase, boolean allKeywords) {
-        SQLHandler sqlHandler = SQLHandler.getInstance();
-        int[] ids = sqlHandler.get_ids();
+    public List<String> search_articles(String phrase, boolean allKeywords) {
+        RequestHandler sqlHandler = RequestHandler.getInstance();
         String[] keywords = phrase.split(" ");
 
-        List<IWikiArticle> articles = new ArrayList<IWikiArticle>();
-        for (int i = 0; i < ids.length; i++) {
-            IWikiArticle tempArticle = new WikiArticle(i);
-            IWikiContent tempContent = new WikiContent(tempArticle.getLastContentId());
+        Map<String, List<String>> allEntries = sqlHandler.get_all_titles_with_tags();
+
+        if(null == allEntries) {
+            return new ArrayList<String>();
+        }
+        List<String> articles = new ArrayList<String>();
+        for (String entryTitle : allEntries.keySet()) {
+            List<String> tags = allEntries.get(entryTitle);
+
             if (!allKeywords) {
                 for (String keyword : keywords) {
                     boolean contains = false;
-                    for(String tag : tempContent.getTags()) {
+                    for(String tag : tags) {
                         if(tag.equalsIgnoreCase(keyword)) {
                             contains = true;
                             break;
                         }
                     }
                     if (contains) {
-                        articles.add(tempArticle);
+                        articles.add(entryTitle);
                         break;
                     }
                 }
@@ -48,7 +53,7 @@ public class SearchHandler {
                 boolean allKeywordsFound = true;
                 for(String keyword : keywords) {
                     boolean contains = false;
-                    for(String tag : tempContent.getTags()) {
+                    for(String tag : tags) {
                         if(tag.equalsIgnoreCase(keyword)) {
                             contains = true;
                             break;
@@ -60,7 +65,7 @@ public class SearchHandler {
                     }
                 }
                 if(allKeywordsFound)
-                    articles.add((tempArticle));
+                    articles.add((entryTitle));
             }
         }
 

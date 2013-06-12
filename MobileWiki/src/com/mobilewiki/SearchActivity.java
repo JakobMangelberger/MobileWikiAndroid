@@ -140,8 +140,8 @@ public class SearchActivity extends Activity {
             adapter.sort(new Comparator<String>() {
                 @Override
                 public int compare(String s, String s2) {
-                    IWikiArticle article1 = new WikiArticle(SQLHandler.getInstance().get_id_for_article_title(s));
-                    IWikiArticle article2 = new WikiArticle(SQLHandler.getInstance().get_id_for_article_title(s2));
+                    IWikiArticle article1 = new WikiArticle(RequestHandler.getInstance().getArticleIdForTitle(s));
+                    IWikiArticle article2 = new WikiArticle(RequestHandler.getInstance().getArticleIdForTitle(s2));
                     return article1.getLastContentTimestamp().compareTo(article2.getLastContentTimestamp());
                 }
             });
@@ -149,8 +149,8 @@ public class SearchActivity extends Activity {
             adapter.sort(new Comparator<String>() {
                 @Override
                 public int compare(String s, String s2) {
-                    IWikiArticle article1 = new WikiArticle(SQLHandler.getInstance().get_id_for_article_title(s2));
-                    IWikiArticle article2 = new WikiArticle(SQLHandler.getInstance().get_id_for_article_title(s));
+                    IWikiArticle article1 = new WikiArticle(RequestHandler.getInstance().getArticleIdForTitle(s2));
+                    IWikiArticle article2 = new WikiArticle(RequestHandler.getInstance().getArticleIdForTitle(s));
                     return article1.getLastContentTimestamp().compareTo(article2.getLastContentTimestamp());
                 }
             });
@@ -184,11 +184,11 @@ public class SearchActivity extends Activity {
         }
 
         EditText searchPhraseBox = (EditText) findViewById(R.id.search_text);
-        List<IWikiArticle> articles = searchHandler.search_articles(searchPhraseBox.getText().toString(), matchAllKeywords);
+        List<String> articles = searchHandler.search_articles(searchPhraseBox.getText().toString(), matchAllKeywords);
         list.clear();
 
-        for (IWikiArticle article : articles) {
-            list.add(article.getTitle());
+        for (String article : articles) {
+            list.add(article);
         }
         if (list.size() == 0) {
             listView.setAdapter(noEntriesAdapter);

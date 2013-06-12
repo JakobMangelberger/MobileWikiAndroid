@@ -19,7 +19,6 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 	private String title = "<h2>Some article</h2>";
 	private String str = "<p>Das ist ein <b>Test</b></p> ";
 	private EditText ed_view;
-
 	private static int CASE_BOLD = 1;
 	private static int CASE_PARAGRAPH = 2;
 	private static int CASE_IMAGE = 3;
@@ -41,6 +40,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
 
 		// ed_view.setText(cnt);
+
 	}
 
 	@Override
@@ -91,6 +91,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 
 			raw = ContentHTMLParser.getInstance().parseFromCustomToHtml(raw);
 			parameters.putString("PREVIEW_TEXT", raw);
+			parameters.putString("PREVIEW_TEXT", raw);
 
 			intent.putExtras(parameters);
 			Toast.makeText(this, "This is just a preview!", Toast.LENGTH_LONG)
@@ -118,6 +119,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 
 		String new_string = null;
 		int temp_pos = 0;
+
 		if (switch_num == CASE_BOLD) {
 			new_string = first_part + CUSTOM_START_BOLD_TAG
 					+ CUSTOM_END_BOLD_TAG + end_part;
@@ -156,6 +158,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		super.onSaveInstanceState(savedInstanceState);
 		savedInstanceState.putString("Content", ed_view.getText().toString());
 		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
+
 	}
 
 	@Override
@@ -170,4 +173,5 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		super.onResume();
 		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
 	}
+
 }

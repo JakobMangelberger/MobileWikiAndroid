@@ -3,9 +3,7 @@ package com.mobilewiki;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
@@ -56,7 +54,8 @@ public class MainActivity extends Activity {
 		String cont_bla = (title + str + str + title + str
 				+ str + "<p>Das ist ein <b>Borat!!</b></p>" + "<img src=\"image.png\"/>" + str + str + str + str + str + str + str
 				+ str); 
-		article_text_view.setText(Html.fromHtml(cont_bla, imgGetter, null));
+		RequestHandler requ = RequestHandler.getInstance();
+		article_text_view.setText(requ.getContentForContentId(2));
 		
 
 		ImageButton searchButton = (ImageButton) findViewById(R.id.search_button);
