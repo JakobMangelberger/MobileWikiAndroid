@@ -171,22 +171,46 @@ public class MobileWikiServer extends ServerResource {
 				case "getContentTitleTagForArticleId":
 					article_id = Integer.parseInt(jsonobject_request.get("article_id").toString());
 					
-					hash_map = webservice.getContentTitleTagForArticleId(article_id);
-					jsonobj_response.put("result", hash_map);
+					hash_map = webservice.getContentTitleTagForArticleId(article_id);			
+					if (!hash_map.isEmpty()) {
+						jsonobj_response.put("article_id", hash_map.get("article_id"));
+						jsonobj_response.put("content_id", hash_map.get("content_id"));
+						jsonobj_response.put("title", hash_map.get("title"));
+						jsonobj_response.put("content", hash_map.get("content"));
+						jsonobj_response.put("tag", hash_map.get("tag"));
+						
+					}
+					jsonobj_response.put("result", "Hash Map");
                     break;
 
 				case "getContentTitleTagForContentId":
 					content_id = Integer.parseInt(jsonobject_request.get("content_id").toString());
 					
 					hash_map = webservice.getContentTitleTagForContentId(content_id);
-					jsonobj_response.put("result", hash_map);
+					if (!hash_map.isEmpty()) {
+						jsonobj_response.put("article_id", hash_map.get("article_id"));
+						jsonobj_response.put("content_id", hash_map.get("content_id"));
+						jsonobj_response.put("title", hash_map.get("title"));
+						jsonobj_response.put("content", hash_map.get("content"));
+						jsonobj_response.put("tag", hash_map.get("tag"));
+						
+					}
+					jsonobj_response.put("result", "Hash Map");
                     break;
                     
 				case "getContentTitleTagForTitle":
 					title = jsonobject_request.get("title").toString();
 					
 					hash_map = webservice.getContentTitleTagForTitle(title);
-					jsonobj_response.put("result", hash_map);
+					if (!hash_map.isEmpty()) {
+						jsonobj_response.put("article_id", hash_map.get("article_id"));
+						jsonobj_response.put("content_id", hash_map.get("content_id"));
+						jsonobj_response.put("title", hash_map.get("title"));
+						jsonobj_response.put("content", hash_map.get("content"));
+						jsonobj_response.put("tag", hash_map.get("tag"));
+						
+					}
+					jsonobj_response.put("result", "Hash Map");
                     break;
 					
                 case "getAllTitlesWithTags":

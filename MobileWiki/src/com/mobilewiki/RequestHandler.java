@@ -187,6 +187,78 @@ public class RequestHandler {
     	
         return result;
 	}
+
+	public HashMap<String, String> getContentTitleTagForArticleId(int article_id) {
+		HashMap<String, String> result = new HashMap<String, String>();
+		
+		try {
+    		JSONObject jsonobject_request = new JSONObject();
+			jsonobject_request.put("function", "getContentTitleTagForArticleId");
+			jsonobject_request.put("article_id", article_id);
+	    	
+			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
+			
+			if (jsonobject_response.get("result") != null) {
+				result.put("article_id", (String) jsonobject_response.get("article_id"));
+				result.put("content_id", (String) jsonobject_response.get("content_id"));
+				result.put("title", (String) jsonobject_response.get("title"));
+				result.put("content", (String) jsonobject_response.get("content"));
+				result.put("tag", (String) jsonobject_response.get("tag"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        return result;
+	}
+
+	public HashMap<String, String> getContentTitleTagForContentId(int content_id) {
+		HashMap<String, String> result = new HashMap<String, String>();
+		
+		try {
+    		JSONObject jsonobject_request = new JSONObject();
+			jsonobject_request.put("function", "getContentTitleTagForContentId");
+			jsonobject_request.put("content_id", content_id);
+	    	
+			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
+			
+			if (jsonobject_response.get("result") != null) {
+				result.put("article_id", (String) jsonobject_response.get("article_id"));
+				result.put("content_id", (String) jsonobject_response.get("content_id"));
+				result.put("title", (String) jsonobject_response.get("title"));
+				result.put("content", (String) jsonobject_response.get("content"));
+				result.put("tag", (String) jsonobject_response.get("tag"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        return result;
+	}
+	
+	public HashMap<String, String> getContentTitleTagForTitle(String title) {
+		HashMap<String, String> result = new HashMap<String, String>();
+		
+		try {
+    		JSONObject jsonobject_request = new JSONObject();
+			jsonobject_request.put("function", "getContentTitleTagForTitle");
+			jsonobject_request.put("title", title);
+	    	
+			JSONObject jsonobject_response = webserivce_adapter.callWebservice(jsonobject_request);
+			
+			if (jsonobject_response.get("result") != null) {
+				result.put("article_id", (String) jsonobject_response.get("article_id"));
+				result.put("content_id", (String) jsonobject_response.get("content_id"));
+				result.put("title", (String) jsonobject_response.get("title"));
+				result.put("content", (String) jsonobject_response.get("content"));
+				result.put("tag", (String) jsonobject_response.get("tag"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+        return result;
+	}
 	
 	public int createMain(String wiki_name, String logo_link) {
 		int result = -1;
