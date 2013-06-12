@@ -306,7 +306,7 @@ public class RequestHandler {
     	
     	try {
     		JSONObject jsonobject_request = new JSONObject();
-			jsonobject_request.put("function", "createArticle");
+			jsonobject_request.put("function", "createContent");
 			jsonobject_request.put("article_id", article_id);
 			jsonobject_request.put("content", content);
 			jsonobject_request.put("tag", tag);
