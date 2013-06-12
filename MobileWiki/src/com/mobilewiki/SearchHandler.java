@@ -23,7 +23,7 @@ public class SearchHandler {
     }
 
     public List<String> search_articles(String phrase, boolean allKeywords) {
-        SQLHandler sqlHandler = SQLHandler.getInstance();
+        RequestHandler sqlHandler = RequestHandler.getInstance();
         String[] keywords = phrase.split(" ");
 
         Map<String, List<String>> allEntries = sqlHandler.get_all_titles_with_tags();

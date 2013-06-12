@@ -1,6 +1,6 @@
 package com.mobilewiki.tables;
 
-import com.mobilewiki.SQLHandler;
+import com.mobilewiki.RequestHandler;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,14 +14,14 @@ public class WikiArticle implements IWikiArticle {
 
 
     public WikiArticle(int articleId) {
-        SQLHandler sqlHandler = SQLHandler.getInstance();
+        RequestHandler sqlHandler = RequestHandler.getInstance();
 
         this.article_id = articleId;
-        this.title = sqlHandler.get_title(articleId);
+        this.title = sqlHandler.getTitleForArticleId(articleId);
         this.contents = new TreeMap<Timestamp, Integer>();
-        List<Integer> contents_from_db = sqlHandler.get_contents_for_article(article_id);
+        List<Integer> contents_from_db = sqlHandler.getContentIdsforArticleId(article_id);
         for (int content_id : contents_from_db) {
-            contents.put(sqlHandler.get_timestamp_for_content(content_id), content_id);
+            contents.put(Timestamp.valueOf(sqlHandler.getDateChangeForContentId(content_id)), content_id);
         }
     }
 

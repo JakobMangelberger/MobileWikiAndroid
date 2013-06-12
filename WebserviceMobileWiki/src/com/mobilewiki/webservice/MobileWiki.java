@@ -83,6 +83,40 @@ public class MobileWiki {
 		return title;
 	}
 
+	public int getArticleIdForTitle(String title) {
+		int article_id = 0;
+
+		query = "Select article_id from mobilewikia.wiki_article where title = '"
+				+ title + "'";
+		try {
+			rs = db_controller.getResultSet(query);
+
+			if (rs != null && rs.next()) {
+				article_id = rs.getInt("article_id");
+			}
+			
+		} catch (SQLException e) {
+			System.err.println(e.toString());
+			System.out.println("Error executing the Query: " + query);
+
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+			} catch (SQLException e) {
+				System.err.println(e.toString());
+				System.out
+						.println("Error closing ResultSet: getArticleIdForTitle("
+								+ title + ")");
+			}
+			//db_controller.closeConnectionStatement();
+		}
+
+		return article_id;
+	}	
+	
 	public List<Integer> getContentIdsforArticleId(int article_id) {
 		List<Integer> content_ids = new ArrayList<Integer>();
 		
