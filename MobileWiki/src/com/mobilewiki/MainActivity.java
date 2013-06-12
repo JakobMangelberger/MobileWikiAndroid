@@ -46,30 +46,27 @@ public class MainActivity extends Activity {
 		super.onStart();
 		final EditText searchPhrase = (EditText) findViewById(R.id.search_text);
 
-
+		RequestHandler request_handler = RequestHandler.getInstance();	
 		Bundle bundle = getIntent().getExtras();
 		int article_id = 1;
+		String title = "";
 		
  		if (bundle != null) {
-			if (bundle.getString("article_id") != null) {
-				article_id = Integer.parseInt(bundle.getString("article_id").toString());
+			if (bundle.getString("title") != null) {
+				title = bundle.getString("title").toString();
+				article_id = request_handler.getArticleIdForTitle(title);
 			}
 		}
 		
-		
-		article_text_view.setMovementMethod(new ScrollingMovementMethod());		
-
-		RequestHandler request_handler = RequestHandler.getInstance();	
-
-		
 		List<Integer> content_ids = request_handler.getContentIdsforArticleId(article_id);
-		String title = request_handler.getTitleForArticleId(article_id);
+		title = request_handler.getTitleForArticleId(article_id);
 		String content = request_handler.getContentForContentId(content_ids.get(0));
 		
-		title = IHTMLConstants.HTML_START_TITLE_TAG + title + IHTMLConstants.HTML_END_TITLE_TAG;
-
 		String total = title + content;
+		
 		Log.e("Raw", total);
+		
+		article_text_view.setMovementMethod(new ScrollingMovementMethod());	
 		article_text_view.setText(Html.fromHtml(total));
 
 		ImageButton searchButton = (ImageButton) findViewById(R.id.search_button);
