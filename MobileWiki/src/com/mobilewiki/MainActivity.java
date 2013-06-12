@@ -8,7 +8,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Html.ImageGetter;
+import android.text.Spanned;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -64,10 +66,11 @@ public class MainActivity extends Activity {
 		String title = request_handler.getTitleForArticleId(article_id);
 		String content = request_handler.getContentForContentId(content_ids.get(0));
 		
-		ContentHTMLParser content_html_parser = ContentHTMLParser.getInstance();
-		String text_view = ContentHTMLParser.CUSTOM_START_TITLE_TAG + title + ContentHTMLParser.CUSTOM_END_TITLE_TAG + content;
+		title = IHTMLConstants.HTML_START_TITLE_TAG + title + IHTMLConstants.HTML_END_TITLE_TAG;
 
-		article_text_view.setText(Html.fromHtml(content_html_parser.parseFromCustomToHtml(text_view)));
+		String total = title + content;
+		Log.e("Raw", total);
+		article_text_view.setText(Html.fromHtml(total));
 
 		ImageButton searchButton = (ImageButton) findViewById(R.id.search_button);
 		searchButton.setOnClickListener(new OnClickListener() {
@@ -120,7 +123,11 @@ public class MainActivity extends Activity {
 		case R.id.edit_article:
 			intent = new Intent(MainActivity.this, EditorActivity.class);
 			Bundle parameters = new Bundle(1);
-			parameters.putString("content", article_text_view.getText().toString());
+			
+			String htmlString = Html.toHtml((Spanned) article_text_view.getText());
+			Log.e("Raw what is given to edit: ", htmlString);
+			parameters.putString("content", htmlString);
+			
 			intent.putExtras(parameters);
 			startActivity(intent);
 			return true;

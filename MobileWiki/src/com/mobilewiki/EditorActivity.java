@@ -33,11 +33,15 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 		content_of_the_article = null;
 		if (null != parameters) {
 			content_of_the_article = parameters.getString("content");
-		//	Log.e("content", content_of_the_article);
+			// Log.e("content", content_of_the_article);
 			if (content_of_the_article == null)
 				content_of_the_article = "";
 		}
+
+		content_of_the_article = ContentHTMLParser.getInstance()
+				.parseFromHtmlToCustom(content_of_the_article);
 		ed_view = (EditText) findViewById(R.id.edit_text);
+
 		ed_view.setText(content_of_the_article);
 		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
 		// Call syntax highlighter
