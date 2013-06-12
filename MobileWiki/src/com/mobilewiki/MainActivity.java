@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 	
 		String total = title + content;
 		
-		Log.e("Raw", total);
+		//Log.e("Raw", total);
 		
 		article_text_view.setMovementMethod(new ScrollingMovementMethod());	
 		article_text_view.setText(Html.fromHtml(total));
@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
 			Bundle parameters = new Bundle(2);
 			
 			String htmlString = Html.toHtml((Spanned) article_text_view.getText());
-			Log.e("Raw what is given to edit: ", htmlString);
+		//	Log.e("Raw what is given to edit: ", htmlString);
 			parameters.putString("content", htmlString);
 			parameters.putInt("article_id", article_id);
 			

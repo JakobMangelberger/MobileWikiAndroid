@@ -167,7 +167,7 @@ public class EditorActivity extends Activity implements IHTMLConstants {
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		// This overloads the syntax highlight ing
-		Log.e("I am ", "in rstore instance");
+	//	Log.e("I am ", "in rstore instance");
 		ed_view.setText(savedInstanceState.getString("Content"));
 		
 		ed_view = ContentHTMLParser.getInstance().highlightSyntax(ed_view);
