@@ -1,5 +1,6 @@
 package com.mobilewiki;
 
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -70,6 +71,7 @@ public class MainActivity extends Activity {
 	
 		String total = title + content;
 		
+
 		//Log.e("Raw", total);
 		
 		article_text_view.setMovementMethod(new ScrollingMovementMethod());	

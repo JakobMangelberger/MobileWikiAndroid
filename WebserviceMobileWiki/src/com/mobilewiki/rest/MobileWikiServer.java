@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.restlet.data.MediaType;
 import org.restlet.ext.json.JsonRepresentation;
@@ -172,45 +173,24 @@ public class MobileWikiServer extends ServerResource {
 					article_id = Integer.parseInt(jsonobject_request.get("article_id").toString());
 					
 					hash_map = webservice.getContentTitleTagForArticleId(article_id);			
-					if (!hash_map.isEmpty()) {
-						jsonobj_response.put("article_id", hash_map.get("article_id"));
-						jsonobj_response.put("content_id", hash_map.get("content_id"));
-						jsonobj_response.put("title", hash_map.get("title"));
-						jsonobj_response.put("content", hash_map.get("content"));
-						jsonobj_response.put("tag", hash_map.get("tag"));
-						
-					}
-					jsonobj_response.put("result", "Hash Map");
+					hash_map.put("result", "HashMap");
+					jsonobj_response = new JSONObject(hash_map);
                     break;
 
 				case "getContentTitleTagForContentId":
 					content_id = Integer.parseInt(jsonobject_request.get("content_id").toString());
 					
 					hash_map = webservice.getContentTitleTagForContentId(content_id);
-					if (!hash_map.isEmpty()) {
-						jsonobj_response.put("article_id", hash_map.get("article_id"));
-						jsonobj_response.put("content_id", hash_map.get("content_id"));
-						jsonobj_response.put("title", hash_map.get("title"));
-						jsonobj_response.put("content", hash_map.get("content"));
-						jsonobj_response.put("tag", hash_map.get("tag"));
-						
-					}
-					jsonobj_response.put("result", "Hash Map");
+					hash_map.put("result", "HashMap");
+					jsonobj_response = new JSONObject(hash_map);
                     break;
                     
 				case "getContentTitleTagForTitle":
 					title = jsonobject_request.get("title").toString();
 					
 					hash_map = webservice.getContentTitleTagForTitle(title);
-					if (!hash_map.isEmpty()) {
-						jsonobj_response.put("article_id", hash_map.get("article_id"));
-						jsonobj_response.put("content_id", hash_map.get("content_id"));
-						jsonobj_response.put("title", hash_map.get("title"));
-						jsonobj_response.put("content", hash_map.get("content"));
-						jsonobj_response.put("tag", hash_map.get("tag"));
-						
-					}
-					jsonobj_response.put("result", "Hash Map");
+					hash_map.put("result", "HashMap");
+					jsonobj_response = new JSONObject(hash_map);
                     break;
 					
                 case "getAllTitlesWithTags":
