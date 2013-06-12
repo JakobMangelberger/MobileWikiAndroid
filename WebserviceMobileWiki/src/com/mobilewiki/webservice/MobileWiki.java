@@ -434,7 +434,7 @@ public class MobileWiki {
 	}
 
     public List<String> getAllTitlesWithTags() {
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<String>();
 
         query = "SELECT a.article_id, a.title, c.tag, c.date_change FROM mobilewikia.wiki_article a, mobilewikia.wiki_content c WHERE c.article_id = a.article_id";
 
